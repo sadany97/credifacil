@@ -40,7 +40,7 @@ export const ContractGenerator: React.FC<ContractGeneratorProps> = ({
   });
 
   const contractNumber = `RCF-${Date.now().toString().slice(-8)}`;
-  const websiteUrl = 'https://recuperacioncapital.com';
+  const websiteUrl = 'https://credifacil.com.mx';
   
   // QR Code as SVG data URL for the PDF
   const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(websiteUrl)}`;
@@ -440,7 +440,7 @@ export const ContractGenerator: React.FC<ContractGeneratorProps> = ({
               </tr>
               <tr>
                 <td><strong>Crédito</strong></td>
-                <td>Gestión de la transferencia de fondos recuperados</td>
+                <td>Gestión del desembolso del crédito personal</td>
               </tr>
             </table>
           </div>
@@ -496,7 +496,7 @@ export const ContractGenerator: React.FC<ContractGeneratorProps> = ({
             </div>
             <p>EL CLIENTE acepta que:</p>
             <ol class="terms-list">
-              <li>Los honorarios serán determinados con base en la complejidad del caso y el monto a recuperar.</li>
+              <li>Los intereses serán calculados con base en la tasa acordada y el monto del crédito otorgado.</li>
               <li>Podrán existir gastos administrativos y operativos adicionales según el proceso requerido.</li>
               <li>El pago de comisiones no garantiza un resultado específico, ya que este depende de múltiples factores externos.</li>
               <li>LA EMPRESA se reserva el derecho de modificar las tarifas aplicables con la debida notificación.</li>
@@ -605,7 +605,7 @@ export const ContractGenerator: React.FC<ContractGeneratorProps> = ({
         <div class="qr-section">
           <p style="font-size: 10pt; color: #666; margin-bottom: 10px;">Escanea el código QR para acceder a nuestro sitio web oficial:</p>
           <img src="${qrCodeUrl}" class="qr-code" alt="QR Code" style="width: 120px; height: 120px;" />
-          <div class="qr-label">www.recuperacioncapital.com</div>
+          <div class="qr-label">www.credifacil.com.mx</div>
         </div>
 
         <div class="footer">

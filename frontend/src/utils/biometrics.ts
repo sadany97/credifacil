@@ -2,8 +2,8 @@ import * as LocalAuthentication from 'expo-local-authentication';
 import { Platform, Alert, Linking } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const BIOMETRIC_ENABLED_KEY = '@recuperacion_biometric_enabled';
-const BIOMETRIC_EMAIL_KEY = '@recuperacion_biometric_email';
+const BIOMETRIC_ENABLED_KEY = '@credifacil_biometric_enabled';
+const BIOMETRIC_EMAIL_KEY = '@credifacil_biometric_email';
 
 export interface BiometricResult {
   success: boolean;

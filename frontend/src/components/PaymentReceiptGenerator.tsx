@@ -32,7 +32,7 @@ export const PaymentReceiptGenerator: React.FC<PaymentReceiptGeneratorProps> = (
   const [receiptData, setReceiptData] = useState({
     recipientName: userName,
     amount: '',
-    concept: 'Transferencia de fondos recuperados',
+    concept: 'Desembolso de crédito personal',
     bank: userBank || 'BBVA',
     referenceNumber: '',
     date: new Date().toLocaleDateString('es-MX'),

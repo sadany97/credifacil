@@ -38,7 +38,7 @@ export const WithdrawModal: React.FC<WithdrawModalProps> = ({ visible, onClose, 
   const generateCashCode = () => {
     const timestamp = Date.now().toString().slice(-6);
     const random = Math.floor(Math.random() * 9000 + 1000);
-    const prefix = 'RCE'; // Crédito Capital Efectivo
+    const prefix = 'CFE'; // CrediFácil Efectivo
     return `${prefix}-${timestamp}-${random}`;
   };
 

@@ -27,7 +27,7 @@ const AUTO_RESPONSES: { [key: string]: string } = {
   'estado': 'Para consultar el estado de tu caso, ve a la sección "Mi Caso" en el menú principal. Ahí podrás ver todos los detalles y actualizaciones.',
   'documentos': 'Los documentos que generalmente necesitamos son:\n• Identificación oficial\n• Comprobante de domicilio\n• Estados de cuenta\n• Comprobantes de transacciones',
   'tiempo': 'El tiempo de crédito varía según el caso. En promedio:\n• Casos simples: 2-4 semanas\n• Casos complejos: 8-12 semanas',
-  'costo': 'Solo cobramos si recuperamos tu dinero. Nuestra comisión se define según la complejidad del caso. No hay pagos adelantados.',
+  'costo': 'Ofrecemos tasas de interés competitivas. La tasa se define según tu perfil crediticio. Sin costos ocultos.',
   'gracias': '¡De nada! Estamos aquí para servirte. ¿Hay algo más en lo que pueda ayudarte?',
 };
 

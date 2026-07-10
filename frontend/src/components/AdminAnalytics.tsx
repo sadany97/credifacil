@@ -95,7 +95,7 @@ export const AdminAnalytics: React.FC<AdminAnalyticsProps> = ({
     },
     {
       id: 'recovered',
-      label: 'Total Recuperado',
+      label: 'Total Otorgado',
       value: analytics?.total_recovered || 0,
       icon: 'trending-up',
       color: COLORS.success,
