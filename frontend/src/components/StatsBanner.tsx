@@ -11,7 +11,7 @@ export const StatsBanner: React.FC = () => (
     <View style={styles.statDivider} />
     <View style={styles.statItem}>
       <Text style={styles.statNumber}>$45M+</Text>
-      <Text style={styles.statLabel}>Capital Recuperado</Text>
+      <Text style={styles.statLabel}>Créditos Otorgados</Text>
     </View>
     <View style={styles.statDivider} />
     <View style={styles.statItem}>

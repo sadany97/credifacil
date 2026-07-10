@@ -341,13 +341,13 @@ export const LoginScreen: React.FC = () => {
           </View>
           <View style={styles.notificacionContenido}>
             <Text style={styles.notificacionTitulo}>
-              ¡Crédito Exitosa!
+              ¡Crédito Aprobado!
             </Text>
             <Text style={styles.notificacionTexto}>
               <Text style={styles.notificacionNombre}>{notificacionActual.nombre}</Text> de {notificacionActual.ciudad}
             </Text>
             <Text style={styles.notificacionMonto}>
-              Recuperó {notificacionActual.monto}
+              Recibió {notificacionActual.monto}
             </Text>
             <Text style={styles.notificacionTiempo}>{notificacionActual.tiempo}</Text>
           </View>
@@ -379,8 +379,8 @@ export const LoginScreen: React.FC = () => {
         ]}>
           <View style={styles.logoContainer}>
             <ProfessionalLogo size="large" />
-            <Text style={[styles.logoText, isDesktop && styles.logoTextDesktop]}>Crédito</Text>
-            <Text style={[styles.logoSubtext, isDesktop && styles.logoSubtextDesktop]}>de Capital</Text>
+            <Text style={[styles.logoText, isDesktop && styles.logoTextDesktop]}>CrediFácil</Text>
+            <Text style={[styles.logoSubtext, isDesktop && styles.logoSubtextDesktop]}>Tu Crédito Fácil</Text>
             
             {/* Slogan rotativo */}
             <View style={styles.sloganContainer}>
