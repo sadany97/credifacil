@@ -78,7 +78,9 @@
       },
       "eas": {
         "projectId": "credifacil-app-2024"
-      }
+      },
+      "EXPO_PUBLIC_BACKEND_URL": "https://credifacil-api-cr8u.onrender.com",
+      "EXPO_PUBLIC_APP_NAME": "CrediFácil"
     },
     "owner": "credifacil",
     "description": "CrediFácil - Créditos al alcance de todos. Solicita tu préstamo de forma fácil y sin complicaciones."
