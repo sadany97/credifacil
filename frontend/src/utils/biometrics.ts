@@ -118,7 +118,7 @@ export const authenticateWithBiometrics = async (): Promise<BiometricResult> => 
         errorMessage = 'Sistema canceló la autenticación';
       } else if (result.error === 'lockout') {
         errorMessage = 'Demasiados intentos fallidos. Intenta más tarde.';
-      } else if (result.error === 'lockout_permanent') {
+      } else if ((result.error as string) === 'lockout_permanent') {
         errorMessage = 'Sensor biométrico bloqueado. Reinicia tu dispositivo.';
       } else if (result.error === 'not_enrolled') {
         errorMessage = 'No hay huella digital registrada en este dispositivo.';

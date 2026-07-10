@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import Animated, { FadeIn, FadeInUp, FadeInDown, FadeInLeft, FadeInRight, FadeOut } from 'react-native-reanimated';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import {
   View,
   Text,
@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS, TESTIMONIALS } from '../constants';
+import { COLORS, TESTIMONIALS, obtenerTestimoniosFrescos } from '../constants';
 import { useAuth } from '../contexts/AuthContext';
 import {
   ProfessionalLogo,
@@ -223,130 +223,12 @@ export const LoginScreen: React.FC = () => {
     });
   };
 
-  // Función para randomizar testimonios con nombres mexicanos reales
-  const randomizeTestimonials = (baseTestimonials: typeof TESTIMONIALS) => {
-    // Lista extensa de nombres mexicanos reales completos
-    const nombresReales = [
-      'María Guadalupe Hernández López', 'Juan Carlos Martínez García', 'Ana Patricia Rodríguez Sánchez',
-      'José Antonio González Pérez', 'Rosa María Díaz Flores', 'Francisco Javier López Ramírez',
-      'Laura Elena Morales Castro', 'Roberto Carlos Jiménez Torres', 'Carmen Leticia Vargas Mendoza',
-      'Miguel Ángel Reyes Ortiz', 'Adriana Sofía Ruiz Gutiérrez', 'Fernando Daniel Cruz Navarro',
-      'Silvia Patricia Romero Aguilar', 'Héctor Manuel Herrera Domínguez', 'Claudia Ivonne Medina Salazar',
-      'Jorge Alberto Castillo Ramos', 'Verónica Alejandra Guerrero Vega', 'Raúl Eduardo Estrada Contreras',
-      'Martha Alicia Sandoval Méndez', 'Arturo Enrique Delgado Ríos', 'Gabriela Fernanda Campos Luna',
-      'Oscar Iván Núñez Cervantes', 'Leticia del Carmen Fuentes Soto', 'David Alejandro Ochoa Valdez',
-      'Norma Angélica Rojas Ibarra', 'Luis Enrique Acosta Bautista', 'Beatriz Eugenia Torres Montes',
-      'Sergio Antonio Villanueva León', 'Mariana Isabel Paredes Quiroz', 'Ricardo Alfredo Miranda Espinoza',
-      'Teresa de Jesús Lara Molina', 'Alfonso Guadalupe Pacheco Ávila', 'Diana Carolina Peña Salgado',
-      'Ernesto Javier Santos Coronado', 'Lucía Fernanda Vázquez Mejía', 'Gerardo Martín Cabrera Orozco',
-    ];
-    
-    const ciudadesMexicanas = [
-      'Ciudad de México, CDMX', 'Guadalajara, Jalisco', 'Monterrey, Nuevo León', 
-      'Puebla, Puebla', 'Tijuana, Baja California', 'León, Guanajuato',
-      'Zapopan, Jalisco', 'Mérida, Yucatán', 'San Luis Potosí, S.L.P.',
-      'Aguascalientes, Ags.', 'Hermosillo, Sonora', 'Saltillo, Coahuila',
-      'Mexicali, Baja California', 'Culiacán, Sinaloa', 'Querétaro, Qro.',
-      'Chihuahua, Chihuahua', 'Morelia, Michoacán', 'Cancún, Quintana Roo',
-      'Toluca, Estado de México', 'Villahermosa, Tabasco', 'Tuxtla Gutiérrez, Chiapas',
-      'Durango, Durango', 'Cuernavaca, Morelos', 'Tampico, Tamaulipas',
-    ];
-
-    const tiposRecuperacion = [
-      'Fraude bancario', 'Estafa telefónica', 'Robo de identidad', 'Cargo no reconocido',
-      'Phishing', 'Clonación de tarjeta', 'Transferencia fraudulenta', 'Inversión falsa',
-    ];
-
-    const comentarios = [
-      'Excelente servicio, recuperé mi dinero en tiempo récord.',
-      'Muy profesionales, me mantuvieron informado en todo momento.',
-      'Pensé que había perdido todo, pero lograron obtener mis crédito.',
-      'El mejor servicio de crédito, 100% recomendado.',
-      'Rápidos y eficientes, no puedo estar más agradecido.',
-      'Me devolvieron la tranquilidad, servicio de primera.',
-      'Después de meses sin respuesta del banco, ellos lo lograron.',
-      'Atención personalizada y resultados reales.',
-      'Superaron mis expectativas, muy profesionales.',
-      'Gracias a ellos pude obtener mis ahorros.',
-    ];
-
-    // Generar montos realistas variados (entre $15,000 y $350,000)
-    const generarMontoRealista = () => {
-      const rangos = [
-        { min: 15000, max: 45000, prob: 0.3 },   // 30% montos bajos
-        { min: 45000, max: 120000, prob: 0.4 },  // 40% montos medios
-        { min: 120000, max: 250000, prob: 0.2 }, // 20% montos altos
-        { min: 250000, max: 350000, prob: 0.1 }, // 10% montos muy altos
-      ];
-      
-      const rand = Math.random();
-      let cumProb = 0;
-      for (const rango of rangos) {
-        cumProb += rango.prob;
-        if (rand <= cumProb) {
-          return Math.floor(Math.random() * (rango.max - rango.min) + rango.min);
-        }
-      }
-      return Math.floor(Math.random() * 100000) + 25000;
-    };
-
-    // Mezclar nombres para no repetir
-    const nombresShuffled = [...nombresReales].sort(() => Math.random() - 0.5);
-    const ciudadesShuffled = [...ciudadesMexicanas].sort(() => Math.random() - 0.5);
-    
-    // Tomar entre 8-12 testimonios únicos
-    const selectedCount = Math.floor(Math.random() * 5) + 8;
-    
-    return Array.from({ length: selectedCount }, (_, idx) => {
-      const nombre = nombresShuffled[idx % nombresShuffled.length];
-      const ciudad = ciudadesShuffled[idx % ciudadesShuffled.length];
-      const monto = generarMontoRealista();
-      const diasAtras = Math.floor(Math.random() * 45) + 1;
-      const fecha = new Date();
-      fecha.setDate(fecha.getDate() - diasAtras);
-      const fechaStr = fecha.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric' });
-      
-      return {
-        id: idx + 1,
-        name: nombre,
-        avatar: nombre.charAt(0),
-        location: ciudad,
-        amount: '$' + monto.toLocaleString('es-MX', { minimumFractionDigits: 2 }),
-        date: fechaStr,
-        rating: 5,
-        comment: comentarios[idx % comentarios.length],
-        type: tiposRecuperacion[Math.floor(Math.random() * tiposRecuperacion.length)],
-        verified: true,
-      };
-    });
-  };
-
-  // Cargar testimonios del backend
+  // Cargar testimonios frescos (generados dinámicamente)
   useEffect(() => {
-    const loadTestimonials = async () => {
-      try {
-        // Usar Render.com (24/7 estable)
-        const API_URL = 'https://recuperacion-capital-1.onrender.com';
-        const response = await fetch(`${API_URL}/api/testimonials`);
-        if (response.ok) {
-          const data = await response.json();
-          if (data && data.length > 0) {
-            // Randomizar los testimonios del backend
-            setTestimonials(randomizeTestimonials(data));
-          } else {
-            // Si no hay datos, usar locales randomizados
-            setTestimonials(randomizeTestimonials(TESTIMONIALS));
-          }
-        } else {
-          setTestimonials(randomizeTestimonials(TESTIMONIALS));
-        }
-      } catch (error) {
-        // Si falla, usar testimonios locales randomizados
-        console.log('Using local randomized testimonials');
-        setTestimonials(randomizeTestimonials(TESTIMONIALS));
-      }
-    };
-    loadTestimonials();
+    // Usar testimonios generados localmente para garantizar consistencia
+    // Los testimonios se generan dinámicamente cada día con nombres mexicanos
+    const testimoniosFrescos = obtenerTestimoniosFrescos();
+    setTestimonials(testimoniosFrescos);
   }, []);
 
   // Rotación de testimonios
