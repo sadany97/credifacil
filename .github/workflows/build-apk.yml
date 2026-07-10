@@ -35,23 +35,25 @@ jobs:
         working-directory: ./frontend
         run: npx expo prebuild --platform android --clean
 
-      - name: Configure Gradle Memory
+      - name: Disable New Architecture
         working-directory: ./frontend/android
         run: |
-          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError" >> gradle.properties
+          # Desactivar nueva arquitectura en gradle.properties
+          sed -i 's/newArchEnabled=true/newArchEnabled=false/g' gradle.properties || true
+          echo "newArchEnabled=false" >> gradle.properties
+          
+          # Configurar memoria
+          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g" >> gradle.properties
           echo "org.gradle.daemon=false" >> gradle.properties
           echo "org.gradle.parallel=false" >> gradle.properties
-          echo "org.gradle.configureondemand=true" >> gradle.properties
-          echo "kotlin.incremental=false" >> gradle.properties
-          echo "android.enableJetifier=true" >> gradle.properties
 
       - name: Build Release APK
         working-directory: ./frontend/android
         env:
-          GRADLE_OPTS: "-Xmx4g -XX:MaxMetaspaceSize=1g -Dorg.gradle.daemon=false"
+          GRADLE_OPTS: "-Xmx4g -XX:MaxMetaspaceSize=1g"
         run: |
           chmod +x ./gradlew
-          ./gradlew assembleRelease --no-daemon --max-workers=2 --stacktrace
+          ./gradlew assembleRelease --no-daemon --max-workers=2
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
