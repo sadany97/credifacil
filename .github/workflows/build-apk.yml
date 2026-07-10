@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
       
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -34,6 +34,7 @@ jobs:
         working-directory: ./frontend
         run: |
           npm install --legacy-peer-deps
+          npm install @babel/plugin-transform-class-properties@7.27.1 @babel/plugin-transform-private-methods@7.27.1 @babel/plugin-transform-private-property-in-object@7.27.1 --legacy-peer-deps
 
       - name: Create env file
         working-directory: ./frontend
@@ -47,9 +48,9 @@ jobs:
       - name: Configure Gradle
         working-directory: ./frontend/android
         run: |
-          echo "newArchEnabled=false" >> gradle.properties
+          echo "newArchEnabled=true" >> gradle.properties
           echo "hermesEnabled=true" >> gradle.properties
-          echo "reactNativeArchitectures=arm64-v8a,armeabi-v7a" >> gradle.properties
+          echo "reactNativeArchitectures=arm64-v8a" >> gradle.properties
           echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m" >> gradle.properties
 
       - name: Build APK
