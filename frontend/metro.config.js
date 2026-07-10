@@ -13,6 +13,13 @@ const { FileStore } = require('metro-cache');
 
 const config = getDefaultConfig(__dirname);
 
+// Force Babel transformation for Hermes compatibility
+config.transformer = {
+  ...config.transformer,
+  hermesParser: false,
+  babelTransformerPath: require.resolve('metro-react-native-babel-transformer'),
+};
+
 // Use a stable on-disk store (shared across web/android)
 const root = process.env.METRO_CACHE_ROOT || path.join(__dirname, '.metro-cache');
 config.cacheStores = [
