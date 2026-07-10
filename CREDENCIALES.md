@@ -2,17 +2,14 @@
 
 ## Admin Principal
 - **Email:** admin@credifacil.com
-- **Contraseña:** admin123
-- **Rol:** admin
+- **Password:** admin123
 
-## Información de la Empresa
-- **Nombre:** CrediFácil
-- **Slogan:** Al alcance de todos
-- **Teléfono:** 800-273-3432
-- **Email:** contacto@credifacil.mx
+## Usuario de Prueba (crear desde la app)
+- Registrar nuevo usuario desde la pantalla de inicio
+- El admin puede modificar el estado del crédito desde el panel
 
 ## Notas
-- Esta es una app 100% independiente de Recuperación de Capital
-- Base de datos: credifacil (MongoDB)
+- La base de datos es independiente de "Recuperación de Capital"
+- MongoDB: credifacil (colección separada)
 - Package Android: com.credifacil.app
 - Package iOS: com.credifacil.app

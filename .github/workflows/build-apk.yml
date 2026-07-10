@@ -1,0 +1,75 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      
+      - name: Verify Node version
+        run: |
+          node --version
+          npm --version
+          which node
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install NDK 26
+        run: |
+          yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;26.1.10909125" || true
+          echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
+
+      - name: Install dependencies with correct versions
+        working-directory: ./frontend
+        run: |
+          npm uninstall react-native-reanimated react-native-worklets 2>/dev/null || true
+          npm install react-native-reanimated@4.1.1 react-native-worklets@0.5.0 --legacy-peer-deps
+          npm install --legacy-peer-deps
+
+      - name: Prebuild Android
+        working-directory: ./frontend
+        run: npx expo prebuild --platform android --clean --no-install
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Configure Gradle
+        working-directory: ./frontend/android
+        run: |
+          echo "newArchEnabled=true" >> gradle.properties
+          echo "hermesEnabled=true" >> gradle.properties
+          echo "reactNativeArchitectures=arm64-v8a" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx4g" >> gradle.properties
+
+      - name: Build APK
+        working-directory: ./frontend/android
+        run: |
+          echo "Node version during Gradle build: $(node --version)"
+          echo "Node path: $(which node)"
+          chmod +x ./gradlew
+          ./gradlew assembleRelease --no-daemon -x lint -x test
+        env:
+          ANDROID_NDK_HOME: ${{ env.ANDROID_NDK_HOME }}
+          NODE_BINARY: node
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: CrediFacil-APK
+          path: frontend/android/app/build/outputs/apk/release/*.apk
