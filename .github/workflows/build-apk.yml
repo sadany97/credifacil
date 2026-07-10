@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     
     steps:
       - uses: actions/checkout@v4
@@ -35,11 +35,23 @@ jobs:
         working-directory: ./frontend
         run: npx expo prebuild --platform android --clean
 
-      - name: Build Release APK
+      - name: Configure Gradle Memory
         working-directory: ./frontend/android
         run: |
+          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -XX:+HeapDumpOnOutOfMemoryError" >> gradle.properties
+          echo "org.gradle.daemon=false" >> gradle.properties
+          echo "org.gradle.parallel=false" >> gradle.properties
+          echo "org.gradle.configureondemand=true" >> gradle.properties
+          echo "kotlin.incremental=false" >> gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+
+      - name: Build Release APK
+        working-directory: ./frontend/android
+        env:
+          GRADLE_OPTS: "-Xmx4g -XX:MaxMetaspaceSize=1g -Dorg.gradle.daemon=false"
+        run: |
           chmod +x ./gradlew
-          ./gradlew assembleRelease
+          ./gradlew assembleRelease --no-daemon --max-workers=2 --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
