@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=420">
+    <title>Guía Rápida - Recuperación de Capital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #0d2137 0%, #1a3a5c 100%);
+            width: 420px;
+            min-height: 100vh;
+        }
+        .container {
+            width: 420px;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #c9a227;
+            margin-bottom: 20px;
+        }
+        .logo-box {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            padding: 10px 20px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: 800;
+            color: #0d2137;
+            letter-spacing: 2px;
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .header p {
+            color: #c9a227;
+            font-size: 13px;
+        }
+        
+        /* Trust Banner */
+        .trust-banner {
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.2) 0%, rgba(201, 162, 39, 0.1) 100%);
+            border: 2px solid #c9a227;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .trust-banner .icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .trust-banner h3 {
+            color: #c9a227;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .trust-banner p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        /* Steps Container */
+        .steps-grid {
+            display: grid;
+            gap: 15px;
+        }
+        
+        /* Step Card */
+        .step-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 18px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+        }
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .step-number {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            color: #0d2137;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+        .step-title {
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 700;
+        }
+        .step-content {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .step-icon {
+            font-size: 45px;
+            flex-shrink: 0;
+        }
+        .step-text {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .step-text strong {
+            color: #c9a227;
+        }
+        .action-btn {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        .action-btn.blue {
+            background: #2196F3;
+        }
+        
+        /* Warning Box */
+        .warning-box {
+            background: rgba(255, 152, 0, 0.15);
+            border: 2px solid #ff9800;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .warning-box .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+        .warning-box h3 {
+            color: #ff9800;
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .warning-box p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 2px solid #c9a227;
+        }
+        .footer .checkmark {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        .footer h3 {
+            color: #4CAF50;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 12px;
+        }
+        .footer .contact {
+            margin-top: 15px;
+            color: #c9a227;
+            font-weight: 600;
+            font-size: 13px;
+        }
+        
+        /* Bottom logo */
+        .bottom-logo {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(201, 162, 39, 0.1);
+            border-radius: 12px;
+        }
+        .bottom-logo img {
+            max-width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-box">
+                <span class="logo-text">RCF</span>
+            </div>
+            <h1>Guía de Instalación</h1>
+            <p>App Oficial - Versión 2.0.0</p>
+        </div>
+        
+        <!-- Trust Banner -->
+        <div class="trust-banner">
+            <div class="icon">🔒✅</div>
+            <h3>APLICACIÓN 100% SEGURA Y OFICIAL</h3>
+            <p>El mensaje de advertencia que aparece es <strong>completamente normal</strong> para apps que no están en Play Store. ¡No te preocupes!</p>
+        </div>
+        
+        <!-- Steps -->
+        <div class="steps-grid">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Abre el link de descarga</div>
+                </div>
+                <div class="step-content">
+                    <div class="step-icon">📥</div>
+                    <div class="step-text">
+                        Abre el link que te enviamos. El archivo <strong>se descargará automáticamente</strong>.<br>
+                        <span class="action-btn blue">ABRIR</span> cuando termine
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Aparecerá una advertencia</div>
+                </div>
+                <div class="step-content">
+                    <div class="step-icon">⚠️</div>
+                    <div class="step-text">
+                        Verás un mensaje de <strong>"Play Protect"</strong>. Es normal.<br>
+                        Toca <span class="action-btn blue">Más información</span> o <span class="action-btn blue">Configuración</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Activa el permiso</div>
+                </div>
+                <div class="step-content">
+                    <div class="step-icon">🔓</div>
+                    <div class="step-text">
+                        Activa <strong>"Permitir de esta fuente"</strong>.<br>
+                        El interruptor debe quedar en <span style="color: #4CAF50; font-weight: 700;">verde ✓</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="step-card">
+                <div class="step-header">
+                    <div class="step-number">4</div>
+                    <div class="step-title">¡Instala y listo!</div>
+                </div>
+                <div class="step-content">
+                    <div class="step-icon">✅</div>
+                    <div class="step-text">
+                        Toca <span class="action-btn">INSTALAR</span> y espera unos segundos.<br>
+                        Luego toca <span class="action-btn">ABRIR</span> ¡y disfruta!
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Warning explanation -->
+        <div class="warning-box">
+            <div class="icon">🛡️</div>
+            <h3>¿POR QUÉ APARECE LA ADVERTENCIA?</h3>
+            <p>Google muestra este aviso para <strong>TODAS</strong> las apps que no están en Play Store, sin importar si son seguras. Nuestra app es oficial y tus datos están 100% protegidos.</p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="checkmark">🎉</div>
+            <h3>¡Instalación en menos de 1 minuto!</h3>
+            <p>Ya puedes disfrutar de todos los beneficios de<br>Recuperación de Capital Financiero</p>
+            <p class="contact">¿Dudas? Contáctanos por WhatsApp 📱</p>
+        </div>
+        
+        <!-- Bottom logo -->
+        <div class="bottom-logo">
+            <img src="https://customer-assets.emergentagent.com/job_perfil-capital/artifacts/emqrr2m7_14af1b34-38ba-408c-8cf3-d243c16a363a.jpeg" alt="RCF Logo">
+        </div>
+    </div>
+</body>
+</html>

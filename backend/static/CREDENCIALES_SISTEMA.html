@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credenciales del Sistema - Recuperación de Capital</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 40px;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #0d2137;
+        }
+        .header h1 {
+            color: #0d2137;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 14px;
+        }
+        .warning {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .warning strong {
+            color: #856404;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            background: #0d2137;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .section h2 span {
+            margin-right: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #0d2137;
+        }
+        td {
+            font-size: 14px;
+        }
+        .link {
+            color: #007bff;
+            word-break: break-all;
+        }
+        .password {
+            font-family: 'Courier New', monospace;
+            background: #f8f9fa;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .highlight {
+            background: #d4edda;
+            font-weight: 600;
+        }
+        .cost {
+            text-align: right;
+            font-weight: 600;
+        }
+        .total-row {
+            background: #0d2137;
+            color: white;
+        }
+        .total-row td {
+            font-weight: 700;
+            font-size: 16px;
+        }
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+        @media print {
+            body {
+                padding: 20px;
+                background: white;
+            }
+            .container {
+                box-shadow: none;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔐 CREDENCIALES DEL SISTEMA</h1>
+            <p>Recuperación de Capital - Documento Confidencial</p>
+        </div>
+
+        <div class="warning">
+            <strong>⚠️ ARCHIVO CONFIDENCIAL - NO COMPARTIR CON TERCEROS</strong>
+        </div>
+
+        <!-- PÁGINAS WEB -->
+        <div class="section">
+            <h2><span>🌐</span> PÁGINAS WEB</h2>
+            <table>
+                <tr>
+                    <th>Página</th>
+                    <th>Link</th>
+                </tr>
+                <tr>
+                    <td>Página Principal</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/</td>
+                </tr>
+                <tr>
+                    <td>Landing Page</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/landing</td>
+                </tr>
+                <tr>
+                    <td>Términos y Condiciones</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/terminos</td>
+                </tr>
+                <tr>
+                    <td>Aviso de Privacidad</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/privacidad</td>
+                </tr>
+                <tr>
+                    <td>Guía Rápida</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/guia-rapida</td>
+                </tr>
+                <tr>
+                    <td>Guía de Instalación</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/guia-instalacion</td>
+                </tr>
+                <tr>
+                    <td>Health Check (Servidor)</td>
+                    <td class="link">https://recuperacion-capital-1.onrender.com/api/health</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- CREDENCIALES APP -->
+        <div class="section">
+            <h2><span>👤</span> CREDENCIALES DE LA APLICACIÓN</h2>
+            <table>
+                <tr>
+                    <th>Rol</th>
+                    <th>Email</th>
+                    <th>Contraseña</th>
+                </tr>
+                <tr class="highlight">
+                    <td><strong>Admin Principal</strong></td>
+                    <td>admin@recuperacioncapital.com</td>
+                    <td class="password">admin123456</td>
+                </tr>
+                <tr>
+                    <td>Sub-Admin (Manu)</td>
+                    <td>manu@supervisorgalin.com</td>
+                    <td class="password">manusupervisor2026</td>
+                </tr>
+                <tr>
+                    <td>Sub-Admin (Supervisor)</td>
+                    <td>supervisor@recuperacioncapital.com</td>
+                    <td class="password">supervisor2024</td>
+                </tr>
+                <tr>
+                    <td>Todos los Clientes</td>
+                    <td>(su correo personal)</td>
+                    <td class="password">Usuario2026!</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SERVICIOS -->
+        <div class="section">
+            <h2><span>🔧</span> SERVICIOS Y PANELES DE ADMINISTRACIÓN</h2>
+            <table>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Link</th>
+                    <th>Usuario</th>
+                    <th>Contraseña</th>
+                </tr>
+                <tr>
+                    <td>GitHub (Código)</td>
+                    <td class="link">https://github.com/sadany97/recuperacion-capital</td>
+                    <td>sadany97</td>
+                    <td class="password">(tu contraseña)</td>
+                </tr>
+                <tr>
+                    <td>GitHub Actions (APKs)</td>
+                    <td class="link">https://github.com/sadany97/recuperacion-capital/actions</td>
+                    <td>sadany97</td>
+                    <td class="password">(tu contraseña)</td>
+                </tr>
+                <tr>
+                    <td>Render (Servidor)</td>
+                    <td class="link">https://dashboard.render.com</td>
+                    <td>(tu email)</td>
+                    <td class="password">(tu contraseña)</td>
+                </tr>
+                <tr>
+                    <td>MongoDB Atlas (Base de Datos)</td>
+                    <td class="link">https://cloud.mongodb.com</td>
+                    <td>rcapitalfinanciero@gmail.com</td>
+                    <td class="password">RCF2026secure!</td>
+                </tr>
+                <tr>
+                    <td>Expo (Desarrollo)</td>
+                    <td class="link">https://expo.dev</td>
+                    <td>sadany97</td>
+                    <td class="password">(tu contraseña)</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- TOKENS -->
+        <div class="section">
+            <h2><span>🔑</span> TOKENS DE ACCESO (PARA DESARROLLADORES)</h2>
+            <table>
+                <tr>
+                    <th>Servicio</th>
+                    <th>Token</th>
+                </tr>
+                <tr>
+                    <td>GitHub Token</td>
+                    <td class="password" style="font-size: 11px;">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</td>
+                </tr>
+                <tr>
+                    <td>Expo Token</td>
+                    <td class="password" style="font-size: 11px;">trOBSg9fmuRk4UPysoTG3KWO_HCGRluwUGhNmeP8</td>
+                </tr>
+                <tr>
+                    <td>MongoDB URI</td>
+                    <td class="password" style="font-size: 10px;">mongodb+srv://rcfadmin:RCF2026secure%21@cluster0.cdomtjo.mongodb.net/recuperacion_capital</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- COSTOS -->
+        <div class="section">
+            <h2><span>💰</span> COSTOS MENSUALES</h2>
+            <table>
+                <tr>
+                    <th>Servicio</th>
+                    <th style="text-align: right;">Costo</th>
+                </tr>
+                <tr>
+                    <td>Render (Servidor 24/7)</td>
+                    <td class="cost">$7 USD/mes</td>
+                </tr>
+                <tr>
+                    <td>MongoDB Atlas</td>
+                    <td class="cost">Gratis</td>
+                </tr>
+                <tr>
+                    <td>GitHub</td>
+                    <td class="cost">Gratis</td>
+                </tr>
+                <tr>
+                    <td>Expo</td>
+                    <td class="cost">Gratis</td>
+                </tr>
+                <tr class="total-row">
+                    <td>TOTAL MENSUAL</td>
+                    <td class="cost">$7 USD/mes</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="footer">
+            <p>Documento generado el: Junio 2026</p>
+            <p>Recuperación de Capital - Todos los derechos reservados</p>
+        </div>
+    </div>
+</body>
+</html>

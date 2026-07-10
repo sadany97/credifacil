@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperación de Capital Financiero | Recupera tu dinero con expertos</title>
+    <meta name="description" content="Somos expertos en recuperación de capital perdido por fraudes financieros. Más de 2,500 clientes satisfechos y $45M+ recuperados. Consulta gratuita.">
+    <meta name="keywords" content="recuperación de capital, fraude financiero, recuperar dinero, inversiones perdidas, México">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0d2137;
+            --primary-light: #1a3a5c;
+            --accent: #c9a227;
+            --accent-light: #dbb42c;
+            --text: #1e293b;
+            --text-light: #64748b;
+            --bg: #f8fafc;
+            --white: #ffffff;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(13, 33, 55, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 18px;
+        }
+
+        .nav-logo-text {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--primary);
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(201, 162, 39, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="rgba(201,162,39,0.05)" stroke-width="0.5"/></svg>') repeat;
+            opacity: 0.5;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 span {
+            color: var(--accent);
+        }
+
+        .hero-content p {
+            font-size: 18px;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        .hero-badges {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .hero-badge {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 30px;
+            color: var(--white);
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: var(--primary);
+            padding: 16px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(201, 162, 39, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.3);
+            color: var(--white);
+            padding: 14px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .hero-stats {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--accent);
+            display: block;
+        }
+
+        .stat-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        /* Trust Badges */
+        .trust-section {
+            background: var(--white);
+            padding: 40px 20px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .trust-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 60px;
+            flex-wrap: wrap;
+        }
+
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .trust-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 18px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 100px 20px;
+            background: var(--bg);
+        }
+
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: rgba(201, 162, 39, 0.1);
+            color: var(--accent);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, rgba(201, 162, 39, 0.1), rgba(201, 162, 39, 0.05));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 36px;
+            margin: 0 auto 20px;
+        }
+
+        .service-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .service-card p {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Process Section */
+        .process {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        }
+
+        .process .section-title,
+        .process .section-subtitle {
+            color: var(--white);
+        }
+
+        .process .section-badge {
+            background: rgba(255,255,255,0.1);
+            color: var(--accent);
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+
+        .process-step::after {
+            content: '→';
+            position: absolute;
+            right: -20px;
+            top: 40px;
+            color: var(--accent);
+            font-size: 24px;
+        }
+
+        .process-step:last-child::after {
+            display: none;
+        }
+
+        .step-number {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 0 auto 20px;
+        }
+
+        .process-step h4 {
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .process-step p {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 20px;
+            background: var(--bg);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .testimonial-card:hover {
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial-avatar {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .testimonial-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .testimonial-info p {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        .testimonial-stars {
+            color: var(--accent);
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .testimonial-text {
+            color: var(--text);
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-amount {
+            display: inline-block;
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 100px 20px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            color: var(--primary);
+            opacity: 0.8;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            background: var(--primary);
+            color: var(--white);
+            padding: 18px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(13, 33, 55, 0.3);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary);
+            padding: 80px 20px 30px;
+            color: var(--white);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .footer-brand p {
+            color: rgba(255,255,255,0.7);
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .footer-links h4 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-bottom p {
+            color: rgba(255,255,255,0.5);
+            font-size: 13px;
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: 30px;
+        }
+
+        .footer-legal a {
+            color: rgba(255,255,255,0.5);
+            text-decoration: none;
+            font-size: 13px;
+            transition: color 0.3s;
+        }
+
+        .footer-legal a:hover {
+            color: var(--accent);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+            }
+
+            .hero-cta {
+                justify-content: center;
+            }
+
+            .services-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .process-step::after {
+                display: none;
+            }
+
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .services-grid,
+            .testimonials-grid,
+            .process-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .trust-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <div class="nav-logo-icon">RCF</div>
+                <span class="nav-logo-text">Recuperación de Capital</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#proceso">Proceso</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+            <a href="#contacto" class="nav-cta">Consulta Gratis</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-badges">
+                    <span class="hero-badge">🛡️ 100% Seguro</span>
+                    <span class="hero-badge">⚖️ Avalado por SHCP</span>
+                    <span class="hero-badge">✓ Certificados</span>
+                </div>
+                <h1>Recupera tu <span>Capital Perdido</span> con Expertos</h1>
+                <p>Somos especialistas en la recuperación de fondos perdidos por fraudes financieros, inversiones fallidas y operaciones irregulares. Nuestro equipo de expertos trabaja incansablemente para devolverte lo que es tuyo.</p>
+                <div class="hero-cta">
+                    <a href="#contacto" class="btn-primary">
+                        📞 Consulta Gratuita
+                    </a>
+                    <a href="#proceso" class="btn-secondary">
+                        Ver Cómo Funciona
+                    </a>
+                </div>
+            </div>
+            <div class="hero-stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">+2,500</span>
+                        <span class="stat-label">Clientes Satisfechos</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$45M+</span>
+                        <span class="stat-label">Capital Recuperado</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">98%</span>
+                        <span class="stat-label">Tasa de Éxito</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Soporte Disponible</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Section -->
+    <section class="trust-section">
+        <div class="trust-container">
+            <div class="trust-item">
+                <div class="trust-icon">🔒</div>
+                <span>Datos 100% Protegidos</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">📋</div>
+                <span>Registro ante SHCP</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">⚖️</div>
+                <span>Respaldo Legal Completo</span>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon">✓</div>
+                <span>Empresa Verificada</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicios">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Nuestros Servicios</span>
+                <h2 class="section-title">¿Cómo Podemos Ayudarte?</h2>
+                <p class="section-subtitle">Ofrecemos soluciones integrales para la recuperación de tu capital perdido</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🔍</div>
+                    <h3>Análisis Forense Financiero</h3>
+                    <p>Investigamos a fondo tu caso utilizando tecnología avanzada para rastrear el destino de tus fondos y construir un caso sólido.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">💰</div>
+                    <h3>Recuperación de Fondos</h3>
+                    <p>Gestionamos activamente la recuperación de tu dinero a través de negociación directa, mediación o vías legales.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🛡️</div>
+                    <h3>Asesoría Anti-Fraude</h3>
+                    <p>Te brindamos orientación experta para prevenir futuros fraudes y proteger tus inversiones.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚖️</div>
+                    <h3>Representación Legal</h3>
+                    <p>Nuestro equipo legal te representa ante instituciones financieras y autoridades competentes.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Rastreo Blockchain</h3>
+                    <p>Utilizamos tecnología blockchain para rastrear criptomonedas y activos digitales perdidos.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">📱</div>
+                    <h3>Seguimiento en Tiempo Real</h3>
+                    <p>Monitorea el progreso de tu caso 24/7 a través de nuestra aplicación móvil.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="proceso">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Nuestro Proceso</span>
+                <h2 class="section-title">¿Cómo Trabajamos?</h2>
+                <p class="section-subtitle">Un proceso transparente y eficiente diseñado para maximizar tus posibilidades de recuperación</p>
+            </div>
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h4>Consulta Inicial</h4>
+                    <p>Evaluamos tu caso de forma gratuita y confidencial para determinar la viabilidad de recuperación.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h4>Análisis del Caso</h4>
+                    <p>Nuestros expertos realizan una investigación exhaustiva y desarrollan una estrategia personalizada.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h4>Gestión Activa</h4>
+                    <p>Ejecutamos el plan de recuperación utilizando todos los recursos legales y técnicos disponibles.</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h4>Recuperación</h4>
+                    <p>Transferimos los fondos recuperados a tu cuenta de forma segura y transparente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonios">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-badge">Testimonios</span>
+                <h2 class="section-title">Lo Que Dicen Nuestros Clientes</h2>
+                <p class="section-subtitle">Miles de personas han recuperado su dinero gracias a nuestro equipo</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">M</div>
+                        <div class="testimonial-info">
+                            <h4>María García López</h4>
+                            <p>Ciudad de México</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Excelente servicio, recuperé mi dinero en tiempo récord. El equipo fue muy profesional y me mantuvieron informada en todo momento."</p>
+                    <span class="testimonial-amount">Recuperó: $45,000</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">J</div>
+                        <div class="testimonial-info">
+                            <h4>Juan Pérez Mendoza</h4>
+                            <p>Guadalajara</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Después de meses sin respuesta de mi banco, ellos lograron resolver mi caso en semanas. Altamente recomendados."</p>
+                    <span class="testimonial-amount">Recuperó: $28,500</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">A</div>
+                        <div class="testimonial-info">
+                            <h4>Ana Rodríguez Sánchez</h4>
+                            <p>Monterrey</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Muy agradecida con el servicio. Recuperé fondos que daba por perdidos. El proceso fue transparente y profesional."</p>
+                    <span class="testimonial-amount">Recuperó: $67,000</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">C</div>
+                        <div class="testimonial-info">
+                            <h4>Carlos López Torres</h4>
+                            <p>Puebla</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Profesionales y eficientes. Me sentí seguro durante todo el proceso. Recomiendo ampliamente sus servicios."</p>
+                    <span class="testimonial-amount">Recuperó: $32,000</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">L</div>
+                        <div class="testimonial-info">
+                            <h4>Laura Martínez Ruiz</h4>
+                            <p>Querétaro</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"Gracias a ellos pude recuperar mi inversión. El equipo es muy capacitado y siempre disponible para resolver dudas."</p>
+                    <span class="testimonial-amount">Recuperó: $89,000</span>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <div class="testimonial-avatar">R</div>
+                        <div class="testimonial-info">
+                            <h4>Roberto Sánchez Villa</h4>
+                            <p>Tijuana</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-stars">★★★★★</div>
+                    <p class="testimonial-text">"El mejor servicio de recuperación. Muy transparentes con las comisiones y excelente comunicación durante todo el proceso."</p>
+                    <span class="testimonial-amount">Recuperó: $55,000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section" id="contacto">
+        <div class="section-container">
+            <h2>¿Listo Para Recuperar Tu Dinero?</h2>
+            <p>Agenda una consulta gratuita con nuestros expertos y comienza el proceso de recuperación hoy mismo.</p>
+            <a href="mailto:contacto@recuperacioncapital.com" class="cta-btn">
+                📧 Contáctanos Ahora
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Recuperación de Capital Financiero</h3>
+                    <p>Somos una empresa mexicana especializada en la recuperación de activos financieros perdidos por fraudes, estafas e inversiones fallidas. Nuestro compromiso es devolverte lo que es tuyo.</p>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">📘</a>
+                        <a href="#" class="social-link">📸</a>
+                        <a href="#" class="social-link">🐦</a>
+                        <a href="#" class="social-link">💼</a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Servicios</h4>
+                    <ul>
+                        <li><a href="#servicios">Recuperación de Fondos</a></li>
+                        <li><a href="#servicios">Análisis Forense</a></li>
+                        <li><a href="#servicios">Asesoría Legal</a></li>
+                        <li><a href="#servicios">Rastreo Blockchain</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <ul>
+                        <li><a href="#proceso">Cómo Funciona</a></li>
+                        <li><a href="#testimonios">Testimonios</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                        <li><a href="guia-instalacion.html">Descargar App</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="terminos.html">Términos y Condiciones</a></li>
+                        <li><a href="privacidad.html">Aviso de Privacidad</a></li>
+                        <li><a href="Aviso_de_Privacidad_Recuperacion_de_Capital.pdf">Descargar Aviso (PDF)</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Recuperación de Capital Financiero, S.A. de C.V. Todos los derechos reservados.</p>
+                <div class="footer-legal">
+                    <a href="terminos.html">Términos</a>
+                    <a href="privacidad.html">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(13, 33, 55, 0.98)';
+                navbar.style.padding = '10px 0';
+            } else {
+                navbar.style.background = 'rgba(13, 33, 55, 0.95)';
+                navbar.style.padding = '15px 0';
+            }
+        });
+    </script>
+</body>
+</html>
