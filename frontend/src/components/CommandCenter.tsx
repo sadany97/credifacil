@@ -32,7 +32,7 @@ export const CommandCenter: React.FC<CommandCenterProps> = ({ visible, onClose, 
   const [loading, setLoading] = useState(true);
   const [autoRefresh, setAutoRefresh] = useState(true);
 
-  const API_URL = 'https://recuperacion-capital-production.up.railway.app';
+  const API_URL = 'https://credifacil-api-cr8u.onrender.com';
 
   const fetchActivities = async () => {
     try {

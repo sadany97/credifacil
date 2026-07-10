@@ -3,10 +3,10 @@ import Constants from 'expo-constants';
 
 // URL del servidor - Usar variable de entorno
 const getApiUrl = (): string => {
-  // Prioridad: 1) Constants.expoConfig, 2) process.env, 3) fallback a Render.com
+  // Prioridad: 1) Constants.expoConfig, 2) process.env, 3) fallback a CrediFácil en Render
   const backendUrl = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL 
     || process.env.EXPO_PUBLIC_BACKEND_URL 
-    || 'https://recuperacion-capital-1.onrender.com';
+    || 'https://credifacil-api-cr8u.onrender.com';
   
   console.log('[API] Using backend URL:', backendUrl);
   return backendUrl;
