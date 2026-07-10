@@ -3,675 +3,217 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Política de Privacidad - Recuperación de Capital</title>
-    <meta name="description" content="Política de Privacidad de la aplicación Recuperación de Capital">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Aviso de Privacidad - CrediFácil</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1B5E20 0%, #4CAF50 100%);
             min-height: 100vh;
-            color: #1e293b;
-            line-height: 1.7;
         }
-
-        .header {
-            background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
-            color: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-
-        .header-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .logo-icon {
-            width: 60px;
-            height: 60px;
-            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 28px;
-        }
-
-        .logo-text {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        .header h1 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-
-        .header p {
-            font-size: 16px;
-            opacity: 0.9;
-        }
-
-        .last-updated {
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            padding: 8px 20px;
-            border-radius: 20px;
-            margin-top: 20px;
-            font-size: 14px;
-        }
-
         .container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
-
-        .card {
+        .header {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: #1B5E20;
+            margin-bottom: 10px;
+        }
+        .slogan {
+            color: #4CAF50;
+            font-size: 16px;
+        }
+        .content {
             background: white;
             border-radius: 20px;
             padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
         }
-
-        .section-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #0d2137;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .section-title .icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 18px;
-        }
-
-        .section-number {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-            background: #0d2137;
-            color: white;
-            border-radius: 50%;
-            font-size: 14px;
-            font-weight: 700;
-            margin-right: 10px;
-        }
-
-        p {
-            margin-bottom: 15px;
-            color: #475569;
-        }
-
-        ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-
-        li {
-            margin-bottom: 10px;
-            color: #475569;
-        }
-
-        .highlight-box {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-left: 4px solid #0d2137;
-            padding: 20px 25px;
-            border-radius: 0 12px 12px 0;
+        h1 { color: #1B5E20; margin-bottom: 30px; font-size: 28px; }
+        h2 { color: #2E7D32; margin: 30px 0 15px; font-size: 20px; }
+        p { margin-bottom: 15px; text-align: justify; }
+        ul { margin: 15px 0 15px 30px; }
+        li { margin-bottom: 10px; }
+        .highlight {
+            background: #E8F5E9;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #4CAF50;
             margin: 20px 0;
         }
-
-        .highlight-box p {
-            margin: 0;
-            color: #0d2137;
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            padding: 20px;
         }
-
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        .data-table th,
-        .data-table td {
-            padding: 15px;
-            text-align: left;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .data-table th {
-            background: #f8fafc;
-            font-weight: 600;
-            color: #0d2137;
-        }
-
-        .data-table tr:hover {
-            background: #f8fafc;
-        }
-
         .badge {
             display: inline-block;
-            padding: 4px 12px;
+            background: #1976D2;
+            color: white;
+            padding: 8px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
+            margin-bottom: 20px;
         }
-
-        .badge-green {
-            background: #dcfce7;
-            color: #166534;
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
         }
-
-        .badge-blue {
-            background: #dbeafe;
-            color: #1e40af;
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #F5F5F5;
+            border-radius: 12px;
+            overflow: hidden;
         }
-
-        .contact-box {
-            background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        th {
+            background: #1B5E20;
             color: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin-top: 20px;
-        }
-
-        .contact-box h3 {
-            font-size: 18px;
-            margin-bottom: 15px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            font-size: 15px;
-        }
-
-        .contact-item .icon {
-            width: 36px;
-            height: 36px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .rights-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .right-card {
-            background: #f8fafc;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-        }
-
-        .right-card .icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            font-size: 24px;
-        }
-
-        .right-card h4 {
-            font-size: 16px;
-            color: #0d2137;
-            margin-bottom: 8px;
-        }
-
-        .right-card p {
-            font-size: 13px;
-            margin: 0;
-        }
-
-        .security-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .security-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 15px;
-            padding: 20px;
-            background: #f8fafc;
-            border-radius: 12px;
-        }
-
-        .security-item .icon {
-            width: 44px;
-            height: 44px;
-            background: #dcfce7;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-
-        .security-item h4 {
-            font-size: 15px;
-            color: #0d2137;
-            margin-bottom: 5px;
-        }
-
-        .security-item p {
-            font-size: 13px;
-            margin: 0;
-        }
-
-        .footer {
-            background: #0d2137;
-            color: white;
-            padding: 40px 20px;
-            text-align: center;
-        }
-
-        .footer p {
-            color: rgba(255,255,255,0.7);
-            font-size: 14px;
-        }
-
-        .footer-links {
-            margin-top: 20px;
-        }
-
-        .footer-links a {
-            color: #c9a227;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 14px;
-        }
-
-        .footer-links a:hover {
-            text-decoration: underline;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 28px;
-            }
-
-            .card {
-                padding: 25px;
-            }
-
-            .section-title {
-                font-size: 18px;
-            }
-
-            .data-table {
-                font-size: 14px;
-            }
-
-            .data-table th,
-            .data-table td {
-                padding: 10px;
-            }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header-content">
-            <div class="logo">
-                <div class="logo-icon">🛡️</div>
-                <span class="logo-text">Recuperación de Capital</span>
-            </div>
-            <h1>Política de Privacidad</h1>
-            <p>Nos comprometemos a proteger tu información personal</p>
-            <div class="last-updated">📅 Última actualización: Marzo 2025</div>
-        </div>
-    </header>
-
     <div class="container">
-        <!-- Introducción -->
-        <div class="card">
-            <div class="highlight-box">
-                <p><strong>Tu privacidad es nuestra prioridad.</strong> Esta Política de Privacidad describe cómo Recuperación de Capital recopila, utiliza y protege tu información personal cuando utilizas nuestra aplicación móvil.</p>
-            </div>
-            <p>Al utilizar nuestra aplicación, aceptas las prácticas descritas en esta política. Te recomendamos leerla detenidamente para comprender cómo manejamos tu información.</p>
+        <div class="header">
+            <div class="logo">🔒 CrediFácil</div>
+            <div class="slogan">Tu privacidad es nuestra prioridad</div>
         </div>
-
-        <!-- 1. Responsable del Tratamiento -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">1</span>
-                Responsable del Tratamiento de Datos
-            </h2>
-            <p>El responsable del tratamiento de tus datos personales es:</p>
-            <table class="data-table">
-                <tr>
-                    <th>Razón Social</th>
-                    <td>Recuperación de Capital</td>
-                </tr>
-                <tr>
-                    <th>Domicilio</th>
-                    <td>Ciudad de México, México</td>
-                </tr>
-                <tr>
-                    <th>Correo Electrónico</th>
-                    <td>recuperaciondecapitalfinancier@gmail.com</td>
-                </tr>
-                <tr>
-                    <th>Teléfono</th>
-                    <td>+52 55 3104 8344 / +52 56 6267 7645</td>
-                </tr>
-            </table>
-        </div>
-
-        <!-- 2. Datos que Recopilamos -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">2</span>
-                Datos Personales que Recopilamos
-            </h2>
-            <p>Para brindarte nuestros servicios, recopilamos los siguientes tipos de información:</p>
+        
+        <div class="content">
+            <span class="badge">🛡️ AVISO DE PRIVACIDAD INTEGRAL</span>
+            <h1>Aviso de Privacidad</h1>
             
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Tipo de Dato</th>
-                        <th>Descripción</th>
-                        <th>Obligatorio</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Nombre completo</strong></td>
-                        <td>Para identificarte en la plataforma</td>
-                        <td><span class="badge badge-green">Sí</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Correo electrónico</strong></td>
-                        <td>Para acceso a tu cuenta y comunicaciones</td>
-                        <td><span class="badge badge-green">Sí</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Contraseña</strong></td>
-                        <td>Para proteger el acceso a tu cuenta (almacenada encriptada)</td>
-                        <td><span class="badge badge-green">Sí</span></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Información bancaria</strong></td>
-                        <td>CLABE y banco destino (solo para procesar retiros solicitados)</td>
-                        <td><span class="badge badge-blue">Opcional</span></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <div class="highlight-box">
-                <p>🔒 <strong>Importante:</strong> No recopilamos datos de ubicación, contactos, fotos, ni ningún otro dato de tu dispositivo que no sea estrictamente necesario para el funcionamiento de la aplicación.</p>
-            </div>
-        </div>
-
-        <!-- 3. Finalidad del Tratamiento -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">3</span>
-                Finalidad del Tratamiento
-            </h2>
-            <p>Utilizamos tus datos personales para los siguientes fines:</p>
-            <ul>
-                <li><strong>Crear y gestionar tu cuenta de usuario</strong> - Permitirte acceder a la aplicación de forma segura</li>
-                <li><strong>Mostrar información de tu cuenta</strong> - Visualizar saldos, movimientos e historial</li>
-                <li><strong>Procesar solicitudes</strong> - Gestionar tus solicitudes de disposición de fondos</li>
-                <li><strong>Comunicaciones</strong> - Enviarte información importante sobre tu cuenta</li>
-                <li><strong>Soporte al cliente</strong> - Atender tus consultas y resolver problemas</li>
-                <li><strong>Seguridad</strong> - Prevenir accesos no autorizados y proteger tu cuenta</li>
-            </ul>
-        </div>
-
-        <!-- 4. Base Legal -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">4</span>
-                Fundamento Legal
-            </h2>
-            <p>El tratamiento de tus datos personales se realiza con fundamento en:</p>
-            <ul>
-                <li><strong>Tu consentimiento expreso</strong> - Otorgado al momento de registrarte y aceptar estos términos</li>
-                <li><strong>Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP)</strong> - Legislación mexicana vigente</li>
-                <li><strong>Reglamento de la LFPDPPP</strong> - Disposiciones complementarias aplicables</li>
-            </ul>
-            <div class="highlight-box">
-                <p>Puedes retirar tu consentimiento en cualquier momento, lo cual podría afectar la prestación de algunos servicios.</p>
-            </div>
-        </div>
-
-        <!-- 5. Compartición de Datos -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">5</span>
-                Transferencia de Datos a Terceros
-            </h2>
-            <p><strong>No vendemos, alquilamos ni compartimos tu información personal con terceros</strong> para fines de marketing o publicidad.</p>
-            <p>Solo compartimos información en los siguientes casos:</p>
-            <ul>
-                <li><strong>Requerimiento legal</strong> - Cuando sea solicitado por autoridades competentes mediante orden judicial</li>
-                <li><strong>Procesamiento de operaciones</strong> - Con instituciones bancarias únicamente para procesar retiros que tú solicites</li>
-                <li><strong>Proveedores de servicios</strong> - Con proveedores que nos ayudan a operar la aplicación, bajo estrictos acuerdos de confidencialidad</li>
-            </ul>
-        </div>
-
-        <!-- 6. Derechos ARCO -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">6</span>
-                Tus Derechos (Derechos ARCO)
-            </h2>
-            <p>De acuerdo con la legislación mexicana, tienes los siguientes derechos sobre tus datos personales:</p>
+            <p><strong>Última actualización:</strong> Enero 2024</p>
             
-            <div class="rights-grid">
-                <div class="right-card">
-                    <div class="icon">📋</div>
-                    <h4>Acceso</h4>
-                    <p>Conocer qué datos tenemos sobre ti</p>
-                </div>
-                <div class="right-card">
-                    <div class="icon">✏️</div>
-                    <h4>Rectificación</h4>
-                    <p>Corregir datos inexactos o incompletos</p>
-                </div>
-                <div class="right-card">
-                    <div class="icon">🗑️</div>
-                    <h4>Cancelación</h4>
-                    <p>Solicitar la eliminación de tus datos</p>
-                </div>
-                <div class="right-card">
-                    <div class="icon">🚫</div>
-                    <h4>Oposición</h4>
-                    <p>Oponerte al tratamiento de tus datos</p>
-                </div>
+            <div class="highlight">
+                <strong>Compromiso:</strong> En CrediFácil nos comprometemos a proteger tu información personal. Este aviso describe cómo recopilamos, usamos y protegemos tus datos.
             </div>
 
-            <p>Para ejercer cualquiera de estos derechos, envía un correo a: <strong>recuperaciondecapitalfinancier@gmail.com</strong> con la siguiente información:</p>
-            <ul>
-                <li>Nombre completo y correo electrónico registrado</li>
-                <li>Descripción clara del derecho que deseas ejercer</li>
-                <li>Documentos que acrediten tu identidad (INE o pasaporte)</li>
-            </ul>
-            <p>Responderemos tu solicitud en un plazo máximo de <strong>20 días hábiles</strong>.</p>
-        </div>
+            <h2>1. Identidad del Responsable</h2>
+            <p><strong>CrediFácil Servicios Financieros S.A. de C.V.</strong>, con domicilio en Ciudad de México, México, es responsable del tratamiento de sus datos personales.</p>
 
-        <!-- 7. Seguridad -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">7</span>
-                Medidas de Seguridad
-            </h2>
-            <p>Implementamos medidas técnicas y organizativas para proteger tu información:</p>
+            <h2>2. Datos Personales que Recopilamos</h2>
+            <p>Para la prestación de nuestros servicios, recopilamos los siguientes datos:</p>
             
-            <div class="security-features">
-                <div class="security-item">
-                    <div class="icon">🔐</div>
-                    <div>
-                        <h4>Encriptación SSL/TLS</h4>
-                        <p>Toda la comunicación entre tu dispositivo y nuestros servidores está encriptada</p>
-                    </div>
-                </div>
-                <div class="security-item">
-                    <div class="icon">🔑</div>
-                    <div>
-                        <h4>Contraseñas Hasheadas</h4>
-                        <p>Tu contraseña se almacena encriptada con algoritmo bcrypt</p>
-                    </div>
-                </div>
-                <div class="security-item">
-                    <div class="icon">🛡️</div>
-                    <div>
-                        <h4>Servidores Seguros</h4>
-                        <p>Infraestructura protegida con firewalls y monitoreo continuo</p>
-                    </div>
-                </div>
-                <div class="security-item">
-                    <div class="icon">👤</div>
-                    <div>
-                        <h4>Acceso Restringido</h4>
-                        <p>Solo personal autorizado puede acceder a los datos</p>
-                    </div>
-                </div>
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Categoría</th>
+                        <th>Datos</th>
+                    </tr>
+                    <tr>
+                        <td>Identificación</td>
+                        <td>Nombre completo, fecha de nacimiento, CURP, RFC, género</td>
+                    </tr>
+                    <tr>
+                        <td>Contacto</td>
+                        <td>Teléfono, correo electrónico, domicilio</td>
+                    </tr>
+                    <tr>
+                        <td>Financieros</td>
+                        <td>Cuenta bancaria, ingresos, historial crediticio</td>
+                    </tr>
+                    <tr>
+                        <td>Biométricos</td>
+                        <td>Fotografía de INE, selfie para verificación</td>
+                    </tr>
+                    <tr>
+                        <td>Dispositivo</td>
+                        <td>Información del dispositivo para seguridad</td>
+                    </tr>
+                </table>
             </div>
-        </div>
 
-        <!-- 8. Cookies -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">8</span>
-                Cookies y Tecnologías Similares
-            </h2>
-            <p>Nuestra <strong>aplicación móvil no utiliza cookies</strong>. Los datos de sesión se almacenan de forma segura en tu dispositivo utilizando tokens de autenticación encriptados.</p>
-            <p>No realizamos seguimiento de tu actividad fuera de la aplicación ni utilizamos tecnologías de rastreo publicitario.</p>
-        </div>
-
-        <!-- 9. Retención de Datos -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">9</span>
-                Conservación de Datos
-            </h2>
-            <p>Conservamos tus datos personales durante el tiempo necesario para:</p>
+            <h2>3. Finalidades del Tratamiento</h2>
+            <p><strong>Finalidades primarias (necesarias):</strong></p>
             <ul>
-                <li>Mantener tu cuenta activa y funcional</li>
-                <li>Cumplir con obligaciones legales y fiscales</li>
-                <li>Resolver disputas y hacer cumplir nuestros acuerdos</li>
+                <li>Verificación de identidad</li>
+                <li>Evaluación y otorgamiento de créditos</li>
+                <li>Administración de su cuenta</li>
+                <li>Procesamiento de pagos</li>
+                <li>Cumplimiento de obligaciones legales</li>
+                <li>Atención al cliente</li>
             </ul>
-            <p>Si solicitas la eliminación de tu cuenta, eliminaremos tus datos en un plazo de <strong>30 días</strong>, excepto aquellos que debamos conservar por obligación legal.</p>
-        </div>
-
-        <!-- 10. Menores de Edad -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">10</span>
-                Menores de Edad
-            </h2>
-            <p>Nuestra aplicación <strong>no está dirigida a menores de 18 años</strong>. No recopilamos intencionalmente información de menores de edad.</p>
-            <p>Si eres padre o tutor y crees que tu hijo nos ha proporcionado información personal, contáctanos inmediatamente para eliminarla.</p>
-        </div>
-
-        <!-- 11. Cambios -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">11</span>
-                Cambios a esta Política
-            </h2>
-            <p>Nos reservamos el derecho de modificar esta Política de Privacidad en cualquier momento. Cuando realicemos cambios significativos:</p>
-            <ul>
-                <li>Actualizaremos la fecha de "Última actualización" en la parte superior</li>
-                <li>Te notificaremos mediante la aplicación o por correo electrónico</li>
-                <li>Publicaremos la nueva versión en esta página</li>
-            </ul>
-            <p>Te recomendamos revisar periódicamente esta política para estar informado sobre cómo protegemos tu información.</p>
-        </div>
-
-        <!-- 12. Contacto -->
-        <div class="card">
-            <h2 class="section-title">
-                <span class="section-number">12</span>
-                Contacto
-            </h2>
-            <p>Si tienes preguntas, comentarios o solicitudes relacionadas con esta Política de Privacidad o el tratamiento de tus datos personales, puedes contactarnos:</p>
             
-            <div class="contact-box">
-                <h3>📞 Información de Contacto</h3>
-                <div class="contact-item">
-                    <div class="icon">✉️</div>
-                    <span>recuperaciondecapitalfinancier@gmail.com</span>
-                </div>
-                <div class="contact-item">
-                    <div class="icon">📱</div>
-                    <span>WhatsApp: +52 55 3104 8344</span>
-                </div>
-                <div class="contact-item">
-                    <div class="icon">📱</div>
-                    <span>WhatsApp: +52 56 6267 7645</span>
-                </div>
+            <p><strong>Finalidades secundarias (opcionales):</strong></p>
+            <ul>
+                <li>Envío de promociones y ofertas</li>
+                <li>Encuestas de satisfacción</li>
+                <li>Estudios de mercado</li>
+            </ul>
+
+            <h2>4. Protección de sus Datos</h2>
+            <p>Implementamos medidas de seguridad técnicas, administrativas y físicas para proteger su información:</p>
+            <ul>
+                <li>Encriptación de datos en tránsito y reposo</li>
+                <li>Acceso restringido solo a personal autorizado</li>
+                <li>Monitoreo continuo de seguridad</li>
+                <li>Certificación ISO 27001</li>
+                <li>Servidores seguros en centros de datos certificados</li>
+            </ul>
+
+            <h2>5. Derechos ARCO</h2>
+            <p>Usted tiene derecho a:</p>
+            <ul>
+                <li><strong>Acceso:</strong> Conocer qué datos tenemos sobre usted</li>
+                <li><strong>Rectificación:</strong> Corregir datos inexactos</li>
+                <li><strong>Cancelación:</strong> Solicitar la eliminación de sus datos</li>
+                <li><strong>Oposición:</strong> Oponerse al tratamiento de sus datos</li>
+            </ul>
+            
+            <p>Para ejercer estos derechos, envíe su solicitud a: <strong>privacidad@credifacil.mx</strong></p>
+
+            <h2>6. Transferencia de Datos</h2>
+            <p>Sus datos podrán ser transferidos a:</p>
+            <ul>
+                <li>Autoridades regulatorias cuando sea requerido por ley</li>
+                <li>Sociedades de información crediticia (Buró de Crédito)</li>
+                <li>Proveedores de servicios bajo estrictos acuerdos de confidencialidad</li>
+            </ul>
+
+            <h2>7. Uso de Cookies</h2>
+            <p>Nuestra aplicación puede utilizar cookies y tecnologías similares para mejorar su experiencia. Puede configurar su dispositivo para rechazar cookies, aunque esto podría limitar algunas funcionalidades.</p>
+
+            <h2>8. Cambios al Aviso de Privacidad</h2>
+            <p>Nos reservamos el derecho de modificar este aviso. Los cambios serán notificados a través de la aplicación y publicados en nuestro sitio web.</p>
+
+            <h2>9. Contacto</h2>
+            <p>Para dudas sobre este aviso de privacidad:</p>
+            <ul>
+                <li>📧 Email: privacidad@credifacil.mx</li>
+                <li>📞 Teléfono: 800-273-3432</li>
+                <li>🏢 Domicilio: Ciudad de México, México</li>
+            </ul>
+
+            <div class="highlight">
+                <strong>Consentimiento:</strong> Al utilizar nuestros servicios, usted reconoce haber leído y entendido este Aviso de Privacidad y consiente el tratamiento de sus datos personales conforme al mismo.
             </div>
         </div>
 
-        <!-- Aviso Legal -->
-        <div class="card">
-            <div class="highlight-box">
-                <p><strong>⚠️ Aviso Importante:</strong> Recuperación de Capital es una aplicación de gestión y consulta de información. No somos una institución financiera regulada. Esta aplicación no realiza captación de recursos del público. Para decisiones financieras importantes, consulta siempre con asesores financieros certificados.</p>
-            </div>
+        <div class="footer">
+            <p>© 2024 CrediFácil. Todos los derechos reservados.</p>
+            <p>Protegemos tu información conforme a la LFPDPPP</p>
         </div>
     </div>
-
-    <footer class="footer">
-        <p>© 2025 Recuperación de Capital. Todos los derechos reservados.</p>
-        <div class="footer-links">
-            <a href="#">Términos y Condiciones</a>
-            <a href="#">Política de Privacidad</a>
-            <a href="#">Contacto</a>
-        </div>
-        <p style="margin-top: 20px; font-size: 12px;">
-            Esta política cumple con la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP) de México y los requisitos de Google Play Store.
-        </p>
-    </footer>
 </body>
 </html>
