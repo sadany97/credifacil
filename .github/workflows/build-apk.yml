@@ -14,7 +14,7 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '20'
       
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -34,7 +34,6 @@ jobs:
         working-directory: ./frontend
         run: |
           npm install --legacy-peer-deps
-          npm install babel-preset-expo --legacy-peer-deps
 
       - name: Create env file
         working-directory: ./frontend
@@ -48,10 +47,10 @@ jobs:
       - name: Configure Gradle
         working-directory: ./frontend/android
         run: |
-          echo "newArchEnabled=true" >> gradle.properties
+          echo "newArchEnabled=false" >> gradle.properties
           echo "hermesEnabled=true" >> gradle.properties
-          echo "reactNativeArchitectures=arm64-v8a" >> gradle.properties
-          echo "org.gradle.jvmargs=-Xmx4g" >> gradle.properties
+          echo "reactNativeArchitectures=arm64-v8a,armeabi-v7a" >> gradle.properties
+          echo "org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=512m" >> gradle.properties
 
       - name: Build APK
         working-directory: ./frontend/android
@@ -60,7 +59,6 @@ jobs:
           ./gradlew assembleRelease --no-daemon -x lint -x test
         env:
           ANDROID_NDK_HOME: ${{ env.ANDROID_NDK_HOME }}
-          NODE_BINARY: node
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
