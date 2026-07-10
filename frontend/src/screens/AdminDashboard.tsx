@@ -29,15 +29,19 @@ import { useAuth } from '../contexts/AuthContext';
 import { apiCall } from '../services/api';
 import { ContractGenerator, AdminDashboardSkeleton, CANCELLATION_REASONS, AdminAnalytics, NotificationBell, ChatModal, PaymentReceiptGenerator, CommandCenter, UserTimeline, SPEIReceiptGenerator, BackupPanel, AdminMessagesModal } from '../components';
 
+// Estados de crédito específicos para CrediFácil
 const CASE_STATUSES = [
-  { id: 'received', label: 'Caso Recibido', icon: 'document-text', color: COLORS.textMuted },
-  { id: 'review', label: 'En Revisión', icon: 'search', color: COLORS.warning },
-  { id: 'processing', label: 'Procesando', icon: 'hourglass', color: COLORS.accent },
-  { id: 'recovering', label: 'Recuperando', icon: 'trending-up', color: COLORS.primary },
-  { id: 'completed', label: 'Completado', icon: 'checkmark-circle', color: COLORS.success },
-  { id: 'funds_recovered', label: 'Crédito Aprobado', icon: 'cash', color: '#4CAF50' },
-  { id: 'funds_sent', label: 'Fondos Enviados', icon: 'send', color: '#2196F3' },
-  { id: 'cancelled', label: 'Cancelación de Crédito', icon: 'close-circle', color: COLORS.danger },
+  { id: 'solicitud_recibida', label: 'Solicitud Recibida', icon: 'document-text', color: COLORS.textMuted },
+  { id: 'en_revision', label: 'En Revisión de Solicitud', icon: 'search', color: '#1976D2' },
+  { id: 'documentacion_pendiente', label: 'Documentación Pendiente', icon: 'folder-open', color: COLORS.warning },
+  { id: 'aprobado', label: 'Crédito Aprobado', icon: 'checkmark-circle', color: '#4CAF50' },
+  { id: 'aprobado_garantia', label: 'Aprobado con Garantía', icon: 'shield-checkmark', color: '#4CAF50' },
+  { id: 'aprobado_mensualidad', label: 'Aprobado con Mensualidad', icon: 'calendar', color: '#4CAF50' },
+  { id: 'en_desembolso', label: 'En Proceso de Desembolso', icon: 'trending-up', color: COLORS.accent },
+  { id: 'credito_otorgado', label: 'Crédito Otorgado', icon: 'cash', color: '#4CAF50' },
+  { id: 'rechazado', label: 'Solicitud Rechazada', icon: 'close-circle', color: COLORS.danger },
+  { id: 'rechazado_documentacion', label: 'Rechazado - Doc. Incompleta', icon: 'alert-circle', color: COLORS.danger },
+  { id: 'cancelado_cliente', label: 'Cancelado por Cliente', icon: 'person-remove', color: COLORS.textMuted },
 ];
 
 export const AdminDashboard: React.FC = () => {
@@ -96,10 +100,11 @@ export const AdminDashboard: React.FC = () => {
     block_transfers: false,
     status_message: '',
     show_welcome_message: false,
+    show_approval_animation: false,
     cancellation_active: false,
     cancellation_reason: 'no_payment',
     cancellation_message: '',
-    case_status: 'received',
+    case_status: 'solicitud_recibida',
     case_notes: '',
     show_extraction_progress: false,
     show_payment_alert: false,
@@ -498,10 +503,11 @@ export const AdminDashboard: React.FC = () => {
       block_transfers: userItem.profile?.block_transfers || false,
       status_message: userItem.profile?.status_message || '',
       show_welcome_message: userItem.profile?.show_welcome_message || false,
+      show_approval_animation: userItem.profile?.show_approval_animation || false,
       cancellation_active: userItem.profile?.cancellation_active || false,
       cancellation_reason: userItem.profile?.cancellation_reason || 'no_payment',
       cancellation_message: userItem.profile?.cancellation_message || '',
-      case_status: userItem.profile?.case_status || 'received',
+      case_status: userItem.profile?.case_status || 'solicitud_recibida',
       case_notes: userItem.profile?.case_notes || '',
       show_extraction_progress: userItem.profile?.show_extraction_progress || false,
       show_payment_alert: userItem.profile?.show_payment_alert || false,
@@ -579,10 +585,11 @@ export const AdminDashboard: React.FC = () => {
         block_transfers: editData.block_transfers,
         status_message: editData.status_message || null,
         show_welcome_message: editData.show_welcome_message,
+        show_approval_animation: editData.show_approval_animation,
         cancellation_active: editData.cancellation_active,
         cancellation_reason: editData.cancellation_reason || null,
         cancellation_message: editData.cancellation_message || null,
-        case_status: editData.case_status || 'received',
+        case_status: editData.case_status || 'solicitud_recibida',
         case_notes: editData.case_notes || null,
         show_extraction_progress: editData.show_extraction_progress,
         show_payment_alert: editData.show_payment_alert,
@@ -1312,7 +1319,7 @@ export const AdminDashboard: React.FC = () => {
                 <View style={styles.toggleInfo}>
                   <Text style={styles.toggleLabel}>Mostrar Mensaje de Bienvenida</Text>
                   <Text style={styles.toggleDescription}>
-                    Muestra popup de crédito en proceso al usuario
+                    Muestra popup de solicitud en proceso al usuario
                   </Text>
                 </View>
                 <TouchableOpacity
@@ -1326,6 +1333,29 @@ export const AdminDashboard: React.FC = () => {
                   <View style={[
                     styles.toggleCircle,
                     editData.show_welcome_message && styles.toggleCircleActive
+                  ]} />
+                </TouchableOpacity>
+              </View>
+
+              {/* Toggle para animación de aprobación */}
+              <View style={styles.toggleRow}>
+                <View style={styles.toggleInfo}>
+                  <Text style={[styles.toggleLabel, { color: '#4CAF50' }]}>🎉 Animación de Aprobación</Text>
+                  <Text style={styles.toggleDescription}>
+                    Muestra celebración cuando el crédito es aprobado
+                  </Text>
+                </View>
+                <TouchableOpacity
+                  style={[
+                    styles.toggleButton,
+                    editData.show_approval_animation && styles.toggleButtonActive,
+                    editData.show_approval_animation && { backgroundColor: '#4CAF50' }
+                  ]}
+                  onPress={() => setEditData({ ...editData, show_approval_animation: !editData.show_approval_animation })}
+                >
+                  <View style={[
+                    styles.toggleCircle,
+                    editData.show_approval_animation && styles.toggleCircleActive
                   ]} />
                 </TouchableOpacity>
               </View>

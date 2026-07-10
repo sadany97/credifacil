@@ -15,7 +15,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '../constants';
+import { COLORS, isApprovalStatus } from '../constants';
 import { useAuth } from '../contexts/AuthContext';
 import { apiCall } from '../services/api';
 import {
@@ -38,6 +38,7 @@ import {
   ExtractionProgress,
   ChangePasswordModal,
   UserMessagesModal,
+  CreditApprovalAnimation,
 } from '../components';
 
 export const UserDashboard: React.FC = () => {
@@ -56,6 +57,7 @@ export const UserDashboard: React.FC = () => {
   const [chatVisible, setChatVisible] = useState(false);
   const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const [messagesModalVisible, setMessagesModalVisible] = useState(false);
+  const [approvalAnimationVisible, setApprovalAnimationVisible] = useState(false);
 
   // Animaciones
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -91,8 +93,14 @@ export const UserDashboard: React.FC = () => {
       setTransactions(transactionsData);
       startAnimations();
       
+      // Mostrar animación de aprobación si el crédito fue aprobado (prioridad máxima)
+      if (profileData?.show_approval_animation && isApprovalStatus(profileData?.case_status)) {
+        setTimeout(() => {
+          setApprovalAnimationVisible(true);
+        }, 600);
+      }
       // Mostrar mensaje de bienvenida si está activado o tiene mensaje de estado
-      if (profileData?.show_welcome_message || profileData?.status_message) {
+      else if (profileData?.show_welcome_message || profileData?.status_message) {
         setTimeout(() => {
           setWelcomeModalVisible(true);
         }, 800);
@@ -262,47 +270,40 @@ export const UserDashboard: React.FC = () => {
               </View>
             </View>
 
+            {/* Solo mostrar tarjeta de retención si hay monto retenido */}
+            {profile?.retained_balance > 0 && (
             <TouchableOpacity 
               style={[styles.balanceCard, styles.retainedCard]}
-              onPress={() => profile?.retained_balance > 0 ? setRetentionModalVisible(true) : null}
-              disabled={!(profile?.retained_balance > 0)}
+              onPress={() => setRetentionModalVisible(true)}
             >
               <View style={styles.balanceIconContainer}>
-                <View style={[styles.balanceIconBg, { backgroundColor: profile?.retained_balance > 0 ? COLORS.warning + '20' : COLORS.success + '20' }]}>
-                  <Ionicons name={profile?.retained_balance > 0 ? "time" : "checkmark-circle"} size={24} color={profile?.retained_balance > 0 ? COLORS.warning : COLORS.success} />
+                <View style={[styles.balanceIconBg, { backgroundColor: COLORS.warning + '20' }]}>
+                  <Ionicons name="time" size={24} color={COLORS.warning} />
                 </View>
               </View>
-              <Text style={styles.balanceLabel}>Saldo Retenido</Text>
-              <Text style={[styles.balanceAmount, profile?.retained_balance > 0 ? styles.retainedAmount : { color: COLORS.success }]}>
+              <Text style={styles.balanceLabel}>Pago Pendiente</Text>
+              <Text style={[styles.balanceAmount, styles.retainedAmount]}>
                 ${profile?.retained_balance?.toLocaleString('es-MX', { minimumFractionDigits: 2 }) || '0.00'}
               </Text>
-              {profile?.retained_balance > 0 ? (
-              <>
-                <View style={styles.retentionInfo}>
-                  <Text style={styles.retentionRefLabel}>Referencia:</Text>
-                  <Text style={styles.retentionRef}>{profile?.retention_reference || '2015478'}</Text>
-                </View>
-                <View style={styles.retentionInfo}>
-                  <Text style={styles.retentionRefLabel}>Concepto:</Text>
-                  <Text style={styles.retentionConcept}>{profile?.retention_concept}</Text>
-                </View>
-                {profile?.retention_note && (
-                  <View style={styles.retentionNoteBox}>
-                    <View style={styles.retentionNoteHeader}>
-                      <Ionicons name="document-text" size={14} color={COLORS.warning} />
-                      <Text style={styles.retentionNoteLabel}>Motivo de pago:</Text>
-                    </View>
-                    <Text style={styles.retentionNoteText}>{profile.retention_note}</Text>
-                  </View>
-                )}
-              </>
-            ) : (
-              <View style={styles.noRetentionBox}>
-                <Ionicons name="checkmark-circle" size={16} color={COLORS.success} />
-                <Text style={styles.noRetentionText}>Sin retenciones pendientes</Text>
+              <View style={styles.retentionInfo}>
+                <Text style={styles.retentionRefLabel}>Referencia:</Text>
+                <Text style={styles.retentionRef}>{profile?.retention_reference || '2015478'}</Text>
               </View>
+              <View style={styles.retentionInfo}>
+                <Text style={styles.retentionRefLabel}>Concepto:</Text>
+                <Text style={styles.retentionConcept}>{profile?.retention_concept}</Text>
+              </View>
+              {profile?.retention_note && (
+                <View style={styles.retentionNoteBox}>
+                  <View style={styles.retentionNoteHeader}>
+                    <Ionicons name="document-text" size={14} color={COLORS.warning} />
+                    <Text style={styles.retentionNoteLabel}>Motivo de pago:</Text>
+                  </View>
+                  <Text style={styles.retentionNoteText}>{profile.retention_note}</Text>
+                </View>
+              )}
+            </TouchableOpacity>
             )}
-          </TouchableOpacity>
         </View>
 
         <View style={styles.actionsSection}>
@@ -582,6 +583,15 @@ export const UserDashboard: React.FC = () => {
         visible={messagesModalVisible}
         onClose={() => setMessagesModalVisible(false)}
         token={token || ''}
+      />
+
+      {/* Animación de Crédito Aprobado */}
+      <CreditApprovalAnimation
+        visible={approvalAnimationVisible}
+        onClose={() => setApprovalAnimationVisible(false)}
+        userName={user?.name || 'Usuario'}
+        amount={profile?.available_balance}
+        statusType={profile?.case_status}
       />
     </SafeAreaView>
   );

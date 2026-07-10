@@ -58,7 +58,7 @@ export const ProgressChart: React.FC<ProgressChartProps> = ({
           <View style={[styles.statIcon, { backgroundColor: COLORS.success + '20' }]}>
             <Ionicons name="checkmark-circle" size={20} color={COLORS.success} />
           </View>
-          <Text style={styles.statLabel}>Recuperado</Text>
+          <Text style={styles.statLabel}>Disponible</Text>
           <Text style={[styles.statValue, { color: COLORS.success }]}>{formatCurrency(recoveredAmount)}</Text>
         </View>
 

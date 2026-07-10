@@ -1,3 +1,4 @@
+// CrediFácil - Modal de bienvenida y actualizaciones
 import React, { useEffect, useRef } from 'react';
 import {
   View,
@@ -89,8 +90,8 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
   });
 
   const defaultMessage = isNewUser
-    ? '¡Felicidades! Has iniciado exitosamente tu proceso de crédito de fondos. Nuestro equipo está trabajando para ti.'
-    : statusMessage || 'Tu proceso de crédito está en curso. Pronto tendrás novedades.';
+    ? '¡Felicidades! Has iniciado exitosamente tu solicitud de crédito. Nuestro equipo está trabajando para ti.'
+    : statusMessage || 'Tu solicitud de crédito está en proceso. Pronto tendrás novedades.';
 
   return (
     <Modal
@@ -130,7 +131,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
           >
             <View style={styles.iconOuter}>
               <View style={styles.iconInner}>
-                <Ionicons name="rocket" size={40} color="#FFFFFF" />
+                <Ionicons name="wallet" size={40} color="#FFFFFF" />
               </View>
             </View>
           </Animated.View>
@@ -138,12 +139,12 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
           {/* Badge */}
           <View style={styles.badge}>
             <Ionicons name="checkmark-circle" size={14} color={COLORS.success} />
-            <Text style={styles.badgeText}>PROCESO ACTIVO</Text>
+            <Text style={styles.badgeText}>SOLICITUD ACTIVA</Text>
           </View>
 
           {/* Title */}
           <Text style={styles.title}>
-            {isNewUser ? '¡Bienvenido!' : '¡Actualización!'}
+            {isNewUser ? '¡Bienvenido a la familia CrediFácil!' : '¡Actualización!'}
           </Text>
           <Text style={styles.userName}>{userName}</Text>
 
@@ -163,11 +164,11 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
             </View>
             <View style={styles.statusItem}>
               <View style={[styles.statusDot, styles.statusDotActive]} />
-              <Text style={styles.statusText}>Proceso iniciado</Text>
+              <Text style={styles.statusText}>Solicitud iniciada</Text>
             </View>
             <View style={styles.statusItem}>
               <View style={[styles.statusDot, styles.statusDotPending]} />
-              <Text style={styles.statusText}>En crédito</Text>
+              <Text style={styles.statusText}>En revisión</Text>
             </View>
           </View>
 
@@ -179,7 +180,7 @@ export const WelcomeModal: React.FC<WelcomeModalProps> = ({
 
           {/* Footer */}
           <Text style={styles.footer}>
-            CrediFácil Financiero
+            CrediFácil - Al alcance de todos
           </Text>
         </Animated.View>
       </View>
@@ -278,10 +279,11 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
   },
   title: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: '800',
     color: COLORS.text,
     marginBottom: 4,
+    textAlign: 'center',
   },
   userName: {
     fontSize: 18,

@@ -208,12 +208,13 @@ class ProfileUpdate(BaseModel):
     block_transfers: Optional[bool] = None  # Bloquear transferencias/disposiciones
     status_message: Optional[str] = None  # Mensaje de estado personalizado para el cliente
     show_welcome_message: Optional[bool] = None  # Mostrar mensaje de bienvenida/actualización
+    show_approval_animation: Optional[bool] = None  # Mostrar animación de crédito aprobado
     # Campos de cancelación
     cancellation_active: Optional[bool] = None  # Activar alerta de cancelación
     cancellation_reason: Optional[str] = None  # Razón de cancelación (no_payment, expired_time, etc.)
     cancellation_message: Optional[str] = None  # Mensaje personalizado de cancelación
     # Campos adicionales
-    case_status: Optional[str] = None  # Estado del caso (received, review, processing, etc.)
+    case_status: Optional[str] = None  # Estado del caso (solicitud_recibida, en_revision, aprobado, etc.)
     case_notes: Optional[str] = None  # Notas del caso
     show_extraction_progress: Optional[bool] = None  # Mostrar progreso de extracción
     show_payment_alert: Optional[bool] = None  # Mostrar alerta de pago pendiente
@@ -487,6 +488,9 @@ async def get_my_profile(user = Depends(get_current_user)):
             "block_transfers": profile.get("block_transfers", False),
             "status_message": profile.get("status_message", ""),
             "show_welcome_message": profile.get("show_welcome_message", False),
+            "show_approval_animation": profile.get("show_approval_animation", False),
+            "case_status": profile.get("case_status", "solicitud_recibida"),
+            "case_notes": profile.get("case_notes", ""),
             "cancellation_active": profile.get("cancellation_active", False),
             "cancellation_reason": profile.get("cancellation_reason", ""),
             "cancellation_message": profile.get("cancellation_message", "")
@@ -803,6 +807,8 @@ async def admin_update_user(user_id: str, profile_data: ProfileUpdate, admin = D
         update_data["status_message"] = profile_data.status_message
     if profile_data.show_welcome_message is not None:
         update_data["show_welcome_message"] = profile_data.show_welcome_message
+    if profile_data.show_approval_animation is not None:
+        update_data["show_approval_animation"] = profile_data.show_approval_animation
     # Campos de cancelación
     if profile_data.cancellation_active is not None:
         update_data["cancellation_active"] = profile_data.cancellation_active

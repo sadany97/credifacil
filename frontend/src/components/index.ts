@@ -53,3 +53,4 @@ export { NotificationHistory } from './NotificationHistory';
 export { ProfilePhoto } from './ProfilePhoto';
 export { ForgotPasswordModal } from './ForgotPasswordModal';
 export { INEVerificationModal } from './INEVerificationModal';
+export { CreditApprovalAnimation } from './CreditApprovalAnimation';

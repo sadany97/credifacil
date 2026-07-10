@@ -1,39 +1,48 @@
-// Trust-inspiring color palette - Professional financial theme
+// CrediFácil - Paleta de colores profesional para créditos
+// Verde (#4CAF50) + Azul (#1976D2) para confianza y facilidad
+
 export const COLORS = {
-  // Primary colors - Deep blues for trust and security
-  primary: '#0d2137',
-  primaryLight: '#1a3a5c',
-  secondary: '#0f4c75',
+  // Primary colors - Verde CrediFácil (confianza, dinero, éxito)
+  primary: '#1B5E20',
+  primaryLight: '#2E7D32',
+  secondary: '#4CAF50',
   
-  // Accent colors
-  accent: '#3282b8',
-  accentLight: '#5da4d9',
+  // Accent colors - Azul confianza
+  accent: '#1976D2',
+  accentLight: '#42A5F5',
   
-  // Success/Money colors
-  success: '#00a878',
-  successLight: '#00c896',
+  // Success/Money colors - Verde brillante
+  success: '#4CAF50',
+  successLight: '#81C784',
   
-  // Warning/Retention
-  warning: '#f59e0b',
-  warningLight: '#fbbf24',
+  // Warning/Retención
+  warning: '#FF9800',
+  warningLight: '#FFB74D',
   
-  // Danger
-  danger: '#ef4444',
+  // Danger/Rechazado
+  danger: '#F44336',
+  dangerLight: '#EF5350',
   
   // Neutrals
-  background: '#f0f4f8',
-  card: '#ffffff',
-  text: '#1e293b',
-  textLight: '#64748b',
-  textMuted: '#94a3b8',
-  border: '#e2e8f0',
+  background: '#F5F5F5',
+  card: '#FFFFFF',
+  text: '#212121',
+  textLight: '#616161',
+  textMuted: '#9E9E9E',
+  border: '#E0E0E0',
   
   // Premium accents
-  gold: '#c9a227',
-  goldLight: '#dbb42c',
-  platinum: '#e5e7eb',
+  gold: '#FFC107',
+  goldLight: '#FFD54F',
+  platinum: '#E8E8E8',
   
-  // Gradient helpers
-  gradientStart: '#0d2137',
-  gradientEnd: '#1a5276',
+  // Gradient helpers - Verde CrediFácil
+  gradientStart: '#1B5E20',
+  gradientEnd: '#4CAF50',
+  
+  // Estados específicos de crédito
+  approved: '#4CAF50',
+  pending: '#FF9800',
+  rejected: '#F44336',
+  inReview: '#1976D2',
 };

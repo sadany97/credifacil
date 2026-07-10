@@ -1,16 +1,42 @@
+// CrediFácil - Timeline de estado del crédito
 import React from 'react';
-import Animated, { FadeIn, FadeInUp, FadeInDown, FadeInLeft, FadeInRight, FadeOut } from 'react-native-reanimated';
+import Animated, { FadeInLeft } from 'react-native-reanimated';
 import { View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { COLORS } from '../constants';
+import { COLORS, CREDIT_STATUSES, getCreditStatusById } from '../constants';
 
-const CASE_STATUSES = [
-  { id: 'received', label: 'Caso Recibido', icon: 'document-text' },
-  { id: 'review', label: 'En Revisión', icon: 'search' },
-  { id: 'processing', label: 'Procesando', icon: 'hourglass' },
-  { id: 'recovering', label: 'Recuperando', icon: 'trending-up' },
-  { id: 'completed', label: 'Completado', icon: 'checkmark-circle' },
+// Estados para mostrar en el timeline del usuario (simplificado)
+const USER_TIMELINE_STATUSES = [
+  { id: 'solicitud_recibida', label: 'Solicitud Recibida', icon: 'document-text' },
+  { id: 'en_revision', label: 'En Revisión', icon: 'search' },
+  { id: 'aprobado', label: 'Crédito Aprobado', icon: 'checkmark-circle' },
+  { id: 'en_desembolso', label: 'En Desembolso', icon: 'trending-up' },
+  { id: 'credito_otorgado', label: 'Crédito Otorgado', icon: 'cash' },
 ];
+
+// Mapeo de estados a posición en timeline
+const STATUS_POSITION_MAP: { [key: string]: number } = {
+  'solicitud_recibida': 0,
+  'en_revision': 1,
+  'documentacion_pendiente': 1,
+  'aprobado': 2,
+  'aprobado_garantia': 2,
+  'aprobado_mensualidad': 2,
+  'en_desembolso': 3,
+  'credito_otorgado': 4,
+  'rechazado': -1,
+  'rechazado_documentacion': -1,
+  'cancelado_cliente': -1,
+  // Legacy mappings
+  'received': 0,
+  'review': 1,
+  'processing': 1,
+  'recovering': 3,
+  'completed': 4,
+  'funds_recovered': 4,
+  'funds_sent': 4,
+  'cancelled': -1,
+};
 
 interface CaseTimelineProps {
   currentStatus: string;
@@ -19,23 +45,62 @@ interface CaseTimelineProps {
 }
 
 export const CaseTimeline: React.FC<CaseTimelineProps> = ({ 
-  currentStatus = 'received',
+  currentStatus = 'solicitud_recibida',
   notes,
   updatedAt 
 }) => {
-  const currentIndex = CASE_STATUSES.findIndex(s => s.id === currentStatus);
+  const position = STATUS_POSITION_MAP[currentStatus] ?? 0;
+  const statusInfo = getCreditStatusById(currentStatus);
+  const isNegativeStatus = position === -1;
+
+  // Si es estado negativo, mostrar vista especial
+  if (isNegativeStatus && statusInfo) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Ionicons name="git-branch-outline" size={22} color={COLORS.primary} />
+          <Text style={styles.title}>Estado de tu Crédito</Text>
+        </View>
+
+        <View style={styles.negativeStatusContainer}>
+          <View style={[styles.negativeIconContainer, { backgroundColor: statusInfo.color + '20' }]}>
+            <Ionicons name={statusInfo.icon as any} size={40} color={statusInfo.color} />
+          </View>
+          <Text style={[styles.negativeStatusLabel, { color: statusInfo.color }]}>
+            {statusInfo.label}
+          </Text>
+          <Text style={styles.negativeStatusDescription}>
+            {statusInfo.description}
+          </Text>
+        </View>
+
+        {notes && (
+          <View style={styles.notesBox}>
+            <Ionicons name="document-text-outline" size={16} color={COLORS.accent} />
+            <Text style={styles.notesText}>{notes}</Text>
+          </View>
+        )}
+
+        {updatedAt && (
+          <Text style={styles.updatedText}>
+            Última actualización: {new Date(updatedAt).toLocaleDateString('es-MX')}
+          </Text>
+        )}
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Ionicons name="git-branch-outline" size={22} color={COLORS.primary} />
-        <Text style={styles.title}>Estado de tu Caso</Text>
+        <Text style={styles.title}>Estado de tu Crédito</Text>
       </View>
 
       <View style={styles.timeline}>
-        {CASE_STATUSES.map((status, index) => {
-          const isCompleted = index <= currentIndex;
-          const isCurrent = index === currentIndex;
+        {USER_TIMELINE_STATUSES.map((status, index) => {
+          const isCompleted = index <= position;
+          const isCurrent = index === position;
           
           return (
             <Animated.View 
@@ -55,7 +120,7 @@ export const CaseTimeline: React.FC<CaseTimelineProps> = ({
                     color={isCompleted ? '#fff' : COLORS.textMuted} 
                   />
                 </View>
-                {index < CASE_STATUSES.length - 1 && (
+                {index < USER_TIMELINE_STATUSES.length - 1 && (
                   <View style={[
                     styles.line,
                     isCompleted && styles.lineCompleted
@@ -84,6 +149,21 @@ export const CaseTimeline: React.FC<CaseTimelineProps> = ({
           );
         })}
       </View>
+
+      {/* Estado específico si es diferente del timeline */}
+      {statusInfo && !USER_TIMELINE_STATUSES.find(s => s.id === currentStatus) && (
+        <View style={[styles.specificStatusBox, { borderColor: statusInfo.color }]}>
+          <Ionicons name={statusInfo.icon as any} size={20} color={statusInfo.color} />
+          <View style={styles.specificStatusContent}>
+            <Text style={[styles.specificStatusLabel, { color: statusInfo.color }]}>
+              {statusInfo.label}
+            </Text>
+            <Text style={styles.specificStatusDescription}>
+              {statusInfo.description}
+            </Text>
+          </View>
+        </View>
+      )}
 
       {notes && (
         <View style={styles.notesBox}>
@@ -202,6 +282,50 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 11,
     fontWeight: '600',
+  },
+  specificStatusBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: COLORS.background,
+    padding: 14,
+    borderRadius: 12,
+    marginTop: 12,
+    borderLeftWidth: 4,
+  },
+  specificStatusContent: {
+    flex: 1,
+  },
+  specificStatusLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    marginBottom: 2,
+  },
+  specificStatusDescription: {
+    fontSize: 12,
+    color: COLORS.textLight,
+  },
+  negativeStatusContainer: {
+    alignItems: 'center',
+    paddingVertical: 20,
+  },
+  negativeIconContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  negativeStatusLabel: {
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 8,
+  },
+  negativeStatusDescription: {
+    fontSize: 14,
+    color: COLORS.textLight,
+    textAlign: 'center',
   },
   notesBox: {
     flexDirection: 'row',

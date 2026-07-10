@@ -65,7 +65,7 @@ export const RecoveryCalculator: React.FC<RecoveryCalculatorProps> = ({ visible,
             </View>
 
             <Text style={styles.label}>
-              Ingresa el monto que deseas recuperar
+              Ingresa el monto que deseas solicitar
             </Text>
 
             <View style={styles.inputContainer}>
