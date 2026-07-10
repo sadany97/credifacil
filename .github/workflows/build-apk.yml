@@ -16,12 +16,6 @@ jobs:
         with:
           node-version: '22'
       
-      - name: Verify Node version
-        run: |
-          node --version
-          npm --version
-          which node
-
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
@@ -36,12 +30,11 @@ jobs:
           yes | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "ndk;26.1.10909125" || true
           echo "ANDROID_NDK_HOME=$ANDROID_SDK_ROOT/ndk/26.1.10909125" >> $GITHUB_ENV
 
-      - name: Install dependencies with correct versions
+      - name: Install dependencies
         working-directory: ./frontend
         run: |
-          npm uninstall react-native-reanimated react-native-worklets 2>/dev/null || true
-          npm install react-native-reanimated@4.1.1 react-native-worklets@0.5.0 --legacy-peer-deps
           npm install --legacy-peer-deps
+          npm install babel-preset-expo --legacy-peer-deps
 
       - name: Create env file
         working-directory: ./frontend
@@ -51,8 +44,6 @@ jobs:
       - name: Prebuild Android
         working-directory: ./frontend
         run: npx expo prebuild --platform android --clean --no-install
-        env:
-          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
 
       - name: Configure Gradle
         working-directory: ./frontend/android
@@ -65,8 +56,6 @@ jobs:
       - name: Build APK
         working-directory: ./frontend/android
         run: |
-          echo "Node version during Gradle build: $(node --version)"
-          echo "Node path: $(which node)"
           chmod +x ./gradlew
           ./gradlew assembleRelease --no-daemon -x lint -x test
         env:
