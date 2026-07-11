@@ -60,6 +60,8 @@ password_reset_collection = db["password_reset"]  # Tokens de crédito de contra
 user_photos_collection = db["user_photos"]  # Fotos de perfil de usuarios
 admin_notifications_collection = db["admin_notifications"]  # Notificaciones para el admin principal
 loan_simulations_collection = db["loan_simulations"]  # Simulaciones de crédito de usuarios
+audit_logs_collection = db["audit_logs"]  # Registro de auditoría de cambios
+user_documents_collection = db["user_documents"]  # Documentos subidos por usuarios
 
 # === INICIALIZAR ADMIN DE CREDIFÁCIL ===
 def init_credifacil_admin():
@@ -296,6 +298,22 @@ async def register(user_data: UserRegister):
         "updated_at": datetime.utcnow()
     }
     profiles_collection.insert_one(new_profile)
+    
+    # NOTIFICAR AL ADMIN DE NUEVO REGISTRO
+    main_admin = users_collection.find_one({"role": "admin"})
+    if main_admin:
+        admin_notifications_collection.insert_one({
+            "admin_id": str(main_admin["_id"]),
+            "type": "new_user_registration",
+            "title": "🆕 Nuevo Usuario Registrado",
+            "message": f"{user_data.name} se registró con email: {user_data.email}",
+            "user_id": user_id,
+            "user_name": user_data.name,
+            "user_email": user_data.email,
+            "user_phone": user_data.phone,
+            "read": False,
+            "created_at": datetime.utcnow()
+        })
     
     token = create_token(user_id, "user")
     return {
@@ -829,6 +847,22 @@ async def admin_update_user(user_id: str, profile_data: ProfileUpdate, admin = D
     
     profiles_collection.update_one({"_id": profile["_id"]}, {"$set": update_data})
     
+    # GUARDAR AUDITORÍA DE CAMBIOS (oculto para el usuario)
+    audit_log = {
+        "action": "user_profile_updated",
+        "admin_id": admin_id,
+        "admin_email": admin.get("email"),
+        "admin_role": admin.get("role"),
+        "user_id": user_id,
+        "user_email": user.get("email"),
+        "changes": {k: v for k, v in update_data.items() if k != "updated_at"},
+        "previous_balance": old_available_balance,
+        "new_balance": profile_data.available_balance if profile_data.available_balance is not None else old_available_balance,
+        "timestamp": datetime.utcnow(),
+        "ip_address": "server"
+    }
+    audit_logs_collection.insert_one(audit_log)
+    
     # Create transaction if available_balance changed and increased
     if profile_data.available_balance is not None and profile_data.available_balance != old_available_balance:
         if profile_data.available_balance > old_available_balance:
@@ -886,6 +920,10 @@ async def admin_update_user(user_id: str, profile_data: ProfileUpdate, admin = D
 
 @app.delete("/api/admin/users/{user_id}")
 async def admin_delete_user(user_id: str, admin = Depends(get_admin_user)):
+    # SOLO EL ADMIN PRINCIPAL PUEDE ELIMINAR USUARIOS
+    if admin.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Solo el administrador principal puede eliminar usuarios")
+    
     try:
         user = users_collection.find_one({"_id": ObjectId(user_id)})
     except:
@@ -1521,6 +1559,10 @@ async def get_basic_analytics(current_user: dict = Depends(get_admin_user)):
 
 @app.get("/api/admin/export/users")
 async def export_users_pdf(current_user: dict = Depends(get_admin_user)):
+    # SOLO ADMIN PRINCIPAL PUEDE EXPORTAR PDF
+    if current_user.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Solo el administrador principal puede exportar datos")
+    
     from reportlab.lib.pagesizes import letter
     from reportlab.lib import colors
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
@@ -1529,17 +1571,8 @@ async def export_users_pdf(current_user: dict = Depends(get_admin_user)):
     import io
     import base64
     
-    # Determinar qué clientes puede ver según el rol
-    if current_user.get("role") == "admin":
-        # Admin ve todos los clientes
-        users = list(users_collection.find({"role": "user"}).sort("name", 1).limit(5000))
-    else:
-        # Sub-admin solo ve sus clientes asignados
-        assigned_users = current_user.get("assigned_users", [])
-        if assigned_users:
-            from bson import ObjectId
-            user_ids = [ObjectId(uid) for uid in assigned_users if ObjectId.is_valid(uid)]
-            users = list(users_collection.find({"_id": {"$in": user_ids}, "role": "user"}).sort("name", 1))
+    # Admin ve todos los clientes
+    users = list(users_collection.find({"role": "user"}).sort("name", 1).limit(5000))
         else:
             users = []
     
@@ -3491,9 +3524,9 @@ from fastapi.responses import StreamingResponse
 
 @app.get("/api/admin/export/users-excel")
 async def export_users_excel(current_user = Depends(get_current_user)):
-    """Exportar todos los usuarios a CSV/Excel"""
-    if current_user.get("role") not in ["admin", "sub_admin"]:
-        raise HTTPException(status_code=403, detail="No autorizado")
+    """Exportar todos los usuarios a CSV/Excel - SOLO ADMIN PRINCIPAL"""
+    if current_user.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Solo el administrador principal puede exportar datos")
     
     output = io.StringIO()
     writer = csv.writer(output)
@@ -3922,6 +3955,82 @@ async def update_simulation_status(simulation_id: str, status: str, current_user
     )
     
     return {"message": "Estado actualizado"}
+
+
+# ============================================
+# 5.6 DOCUMENTOS DE USUARIOS
+# ============================================
+
+class DocumentUpload(BaseModel):
+    userId: str
+    documentType: str  # ine, comprobante_domicilio, comprobante_ingresos, otro
+    fileName: str
+    fileData: str  # Base64
+    mimeType: str
+
+@app.post("/api/users/documents/upload")
+async def upload_user_document(doc: DocumentUpload, current_user = Depends(get_current_user)):
+    """Usuario sube un documento"""
+    try:
+        document = {
+            "user_id": doc.userId or str(current_user["_id"]),
+            "document_type": doc.documentType,
+            "file_name": doc.fileName,
+            "file_data": doc.fileData,
+            "mime_type": doc.mimeType,
+            "status": "pending",  # pending, approved, rejected
+            "uploaded_at": datetime.utcnow(),
+        }
+        result = user_documents_collection.insert_one(document)
+        
+        # Notificar al admin
+        user = users_collection.find_one({"_id": ObjectId(doc.userId or str(current_user["_id"]))})
+        main_admin = users_collection.find_one({"role": "admin"})
+        if main_admin and user:
+            admin_notifications_collection.insert_one({
+                "admin_id": str(main_admin["_id"]),
+                "type": "document_uploaded",
+                "title": "📄 Nuevo Documento",
+                "message": f"{user.get('name', 'Usuario')} subió: {doc.documentType}",
+                "user_id": doc.userId,
+                "user_name": user.get("name"),
+                "document_id": str(result.inserted_id),
+                "document_type": doc.documentType,
+                "read": False,
+                "created_at": datetime.utcnow()
+            })
+        
+        return {"message": "Documento subido exitosamente", "id": str(result.inserted_id)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/admin/users/{user_id}/documents")
+async def get_user_documents(user_id: str, current_user = Depends(get_admin_user)):
+    """Admin obtiene documentos de un usuario"""
+    documents = list(user_documents_collection.find({"user_id": user_id}).sort("uploaded_at", -1))
+    
+    result = []
+    for doc in documents:
+        result.append({
+            "id": str(doc["_id"]),
+            "document_type": doc.get("document_type"),
+            "file_name": doc.get("file_name"),
+            "file_data": doc.get("file_data"),
+            "mime_type": doc.get("mime_type"),
+            "status": doc.get("status", "pending"),
+            "uploaded_at": doc.get("uploaded_at").isoformat() if doc.get("uploaded_at") else None
+        })
+    
+    return result
+
+@app.put("/api/admin/documents/{document_id}/status")
+async def update_document_status(document_id: str, status: str, current_user = Depends(get_admin_user)):
+    """Admin aprueba o rechaza documento"""
+    user_documents_collection.update_one(
+        {"_id": ObjectId(document_id)},
+        {"$set": {"status": status, "reviewed_at": datetime.utcnow(), "reviewed_by": str(current_user["_id"])}}
+    )
+    return {"message": "Estado del documento actualizado"}
 
 
 # ============================================

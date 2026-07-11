@@ -3,446 +3,309 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CrediFácil - Créditos al alcance de todos</title>
-    <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💳</text></svg>">
+    <title>CrediFácil - Créditos Personales en México | Préstamos Rápidos</title>
+    <meta name="description" content="Obtén tu crédito personal desde $5,000 hasta $5,000,000 MXN. Aprobación en 24 horas, sin complicaciones. CrediFácil - Tu aliado financiero de confianza.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #F5F5F5;
-            color: #333;
-        }
+        body { font-family: 'Inter', sans-serif; background: #f8fafc; color: #1e293b; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         /* Header */
-        .header {
-            background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-        .nav {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 28px;
-            font-weight: 800;
-            color: white;
-        }
+        header { background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%); padding: 15px 0; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; }
+        .logo { color: white; font-size: 24px; font-weight: 800; text-decoration: none; }
         .logo span { color: #81C784; }
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            margin-left: 30px;
-            font-weight: 500;
-            transition: opacity 0.3s;
-        }
-        .nav-links a:hover { opacity: 0.8; }
+        nav a { color: rgba(255,255,255,0.9); text-decoration: none; margin-left: 30px; font-weight: 500; transition: color 0.3s; }
+        nav a:hover { color: white; }
+        .cta-btn { background: white; color: #1B5E20; padding: 10px 24px; border-radius: 25px; font-weight: 600; }
         
         /* Hero */
-        .hero {
-            background: linear-gradient(135deg, #1B5E20 0%, #4CAF50 100%);
-            padding: 160px 20px 100px;
-            text-align: center;
-            color: white;
-        }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            font-weight: 800;
-        }
-        .hero p {
-            font-size: 20px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-        .cta-button {
-            display: inline-block;
-            background: #FFC107;
-            color: #1B5E20;
-            padding: 18px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 18px;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
+        .hero { background: linear-gradient(135deg, #1B5E20 0%, #388E3C 50%, #43A047 100%); padding: 140px 0 80px; color: white; position: relative; overflow: hidden; }
+        .hero::before { content: ''; position: absolute; top: 0; right: 0; width: 40%; height: 100%; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>') center/cover; }
+        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 1; }
+        .hero h1 { font-size: 48px; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero p { font-size: 18px; opacity: 0.9; margin-bottom: 30px; }
+        .hero-cta { display: inline-flex; align-items: center; gap: 10px; background: white; color: #1B5E20; padding: 16px 32px; border-radius: 30px; font-weight: 700; font-size: 18px; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
+        .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .hero-stats { display: flex; gap: 40px; margin-top: 40px; }
+        .stat { text-align: center; }
+        .stat-value { font-size: 36px; font-weight: 800; }
+        .stat-label { font-size: 14px; opacity: 0.8; }
+        .hero-card { background: white; border-radius: 20px; padding: 30px; color: #1e293b; box-shadow: 0 20px 60px rgba(0,0,0,0.15); }
+        .hero-card h3 { font-size: 20px; margin-bottom: 20px; color: #1B5E20; }
+        .amount-display { font-size: 42px; font-weight: 800; color: #1B5E20; text-align: center; margin: 20px 0; }
+        .slider-container { margin: 20px 0; }
+        .slider { width: 100%; height: 8px; -webkit-appearance: none; background: #e0e0e0; border-radius: 4px; }
+        .slider::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; background: #1B5E20; border-radius: 50%; cursor: pointer; }
         
-        /* Stats */
-        .stats {
-            background: white;
-            padding: 60px 20px;
-            display: flex;
-            justify-content: center;
-            gap: 60px;
-            flex-wrap: wrap;
-        }
-        .stat {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 48px;
-            font-weight: 800;
-            color: #1B5E20;
-        }
-        .stat-label {
-            font-size: 16px;
-            color: #666;
-            margin-top: 5px;
-        }
-        
-        /* Benefits */
-        .benefits {
-            padding: 80px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .benefits h2 {
-            text-align: center;
-            font-size: 36px;
-            color: #1B5E20;
-            margin-bottom: 50px;
-        }
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        .benefit-card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        .benefit-card:hover {
-            transform: translateY(-10px);
-        }
-        .benefit-icon {
-            font-size: 50px;
-            margin-bottom: 20px;
-        }
-        .benefit-card h3 {
-            color: #1B5E20;
-            margin-bottom: 10px;
-            font-size: 20px;
-        }
-        .benefit-card p {
-            color: #666;
-            font-size: 14px;
-        }
+        /* Features */
+        .features { padding: 80px 0; background: white; }
+        .section-title { text-align: center; font-size: 36px; font-weight: 800; margin-bottom: 50px; color: #1B5E20; }
+        .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; }
+        .feature-card { text-align: center; padding: 30px; border-radius: 16px; background: #f8fafc; transition: transform 0.3s, box-shadow 0.3s; }
+        .feature-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .feature-icon { width: 70px; height: 70px; background: linear-gradient(135deg, #1B5E20, #43A047); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 32px; }
+        .feature-card h3 { font-size: 18px; margin-bottom: 10px; color: #1B5E20; }
+        .feature-card p { color: #64748b; font-size: 14px; }
         
         /* How it works */
-        .how-it-works {
-            background: linear-gradient(135deg, #E8F5E9 0%, #C8E6C9 100%);
-            padding: 80px 20px;
-        }
-        .how-it-works h2 {
-            text-align: center;
-            font-size: 36px;
-            color: #1B5E20;
-            margin-bottom: 50px;
-        }
-        .steps {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-        .step {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.05);
-        }
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: #1B5E20;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 800;
-            flex-shrink: 0;
-        }
-        .step-content h3 {
-            color: #1B5E20;
-            margin-bottom: 5px;
-        }
-        .step-content p {
-            color: #666;
-            font-size: 14px;
-        }
+        .how-it-works { padding: 80px 0; background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); }
+        .steps { display: flex; justify-content: space-between; margin-top: 50px; }
+        .step { flex: 1; text-align: center; padding: 0 30px; position: relative; }
+        .step::after { content: '→'; position: absolute; right: -15px; top: 40px; font-size: 30px; color: #1B5E20; }
+        .step:last-child::after { display: none; }
+        .step-number { width: 60px; height: 60px; background: #1B5E20; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 20px; }
+        .step h3 { margin-bottom: 10px; color: #1B5E20; }
+        .step p { color: #64748b; font-size: 14px; }
         
-        /* Trust badges */
-        .trust {
-            background: white;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .trust h2 {
-            font-size: 24px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        .badges {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        .badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #1B5E20;
-            font-weight: 600;
-        }
-        .badge-icon {
-            font-size: 24px;
-        }
+        /* Testimonials */
+        .testimonials { padding: 80px 0; background: white; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .testimonial-card { background: #f8fafc; padding: 30px; border-radius: 16px; border-left: 4px solid #1B5E20; }
+        .testimonial-text { font-style: italic; color: #475569; margin-bottom: 20px; font-size: 15px; }
+        .testimonial-author { display: flex; align-items: center; gap: 12px; }
+        .author-avatar { width: 50px; height: 50px; background: #1B5E20; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 20px; }
+        .author-info h4 { font-size: 16px; color: #1e293b; }
+        .author-info p { font-size: 13px; color: #64748b; }
+        .stars { color: #fbbf24; margin-bottom: 15px; }
         
         /* CTA Section */
-        .cta-section {
-            background: linear-gradient(135deg, #1B5E20 0%, #4CAF50 100%);
-            padding: 80px 20px;
-            text-align: center;
-            color: white;
-        }
-        .cta-section h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
-        .cta-section p {
-            font-size: 18px;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
+        .cta-section { padding: 80px 0; background: linear-gradient(135deg, #1B5E20 0%, #2E7D32 100%); color: white; text-align: center; }
+        .cta-section h2 { font-size: 36px; margin-bottom: 20px; }
+        .cta-section p { font-size: 18px; opacity: 0.9; margin-bottom: 30px; }
+        .cta-big-btn { display: inline-block; background: white; color: #1B5E20; padding: 18px 50px; border-radius: 30px; font-size: 18px; font-weight: 700; text-decoration: none; transition: all 0.3s; }
+        .cta-big-btn:hover { transform: scale(1.05); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         
         /* Footer */
-        .footer {
-            background: #1B5E20;
-            color: white;
-            padding: 60px 20px 30px;
-        }
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-        }
-        .footer-section h4 {
-            margin-bottom: 20px;
-            font-size: 18px;
-        }
-        .footer-section a {
-            display: block;
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            margin-bottom: 10px;
-            font-size: 14px;
-        }
-        .footer-section a:hover { color: white; }
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255,255,255,0.2);
-            text-align: center;
-            font-size: 14px;
-            opacity: 0.8;
-        }
+        footer { background: #1e293b; color: white; padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
+        .footer-brand h3 { font-size: 24px; margin-bottom: 15px; }
+        .footer-brand p { color: #94a3b8; font-size: 14px; }
+        .footer-links h4 { margin-bottom: 20px; font-size: 16px; }
+        .footer-links a { display: block; color: #94a3b8; text-decoration: none; margin-bottom: 10px; font-size: 14px; transition: color 0.3s; }
+        .footer-links a:hover { color: white; }
+        .footer-bottom { border-top: 1px solid #334155; padding-top: 30px; display: flex; justify-content: space-between; align-items: center; }
+        .footer-bottom p { color: #94a3b8; font-size: 13px; }
+        .certifications { display: flex; gap: 20px; }
+        .cert-badge { background: #334155; padding: 8px 16px; border-radius: 8px; font-size: 12px; color: #94a3b8; }
         
         @media (max-width: 768px) {
+            .hero-content, .features-grid, .steps, .testimonials-grid, .footer-grid { grid-template-columns: 1fr; }
             .hero h1 { font-size: 32px; }
-            .nav-links { display: none; }
-            .stats { gap: 30px; }
-            .stat-value { font-size: 36px; }
-            .step { flex-direction: column; text-align: center; }
+            .step::after { display: none; }
+            nav { display: none; }
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <nav class="nav">
-            <div class="logo">Credi<span>Fácil</span></div>
-            <div class="nav-links">
-                <a href="#beneficios">Beneficios</a>
-                <a href="#proceso">Cómo funciona</a>
-                <a href="terminos.html">Términos</a>
-                <a href="privacidad.html">Privacidad</a>
-            </div>
-        </nav>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Credi<span>Fácil</span></a>
+            <nav>
+                <a href="#features">Beneficios</a>
+                <a href="#how">Cómo funciona</a>
+                <a href="#testimonials">Testimonios</a>
+                <a href="#" class="cta-btn">Solicitar Crédito</a>
+            </nav>
+        </div>
     </header>
 
     <section class="hero">
-        <h1>Tu crédito, fácil y rápido</h1>
-        <p>Obtén hasta $1,500,000 MXN sin complicaciones. Sin revisar buró de crédito y con aprobación en 24 horas.</p>
-        <a href="#" class="cta-button">Solicitar mi crédito</a>
-    </section>
-
-    <section class="stats">
-        <div class="stat">
-            <div class="stat-value">+1M</div>
-            <div class="stat-label">Clientes satisfechos</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value">95%</div>
-            <div class="stat-label">Tasa de aprobación</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value">24h</div>
-            <div class="stat-label">Tiempo de respuesta</div>
-        </div>
-        <div class="stat">
-            <div class="stat-value">$1.2B</div>
-            <div class="stat-label">Créditos otorgados</div>
-        </div>
-    </section>
-
-    <section class="benefits" id="beneficios">
-        <h2>¿Por qué elegir CrediFácil?</h2>
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <div class="benefit-icon">✅</div>
-                <h3>Sin Buró de Crédito</h3>
-                <p>No consultamos tu historial crediticio. Todos merecen una segunda oportunidad.</p>
+        <div class="container hero-content">
+            <div>
+                <h1>Tu crédito personal aprobado en 24 horas</h1>
+                <p>Obtén desde $5,000 hasta $5,000,000 MXN sin complicaciones. Sin revisar buró de crédito para montos menores. Tasas competitivas y pagos flexibles.</p>
+                <a href="#" class="hero-cta">📱 Descargar App Gratis</a>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <div class="stat-value">+50,000</div>
+                        <div class="stat-label">Clientes satisfechos</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">24 hrs</div>
+                        <div class="stat-label">Tiempo de aprobación</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">4.9★</div>
+                        <div class="stat-label">Calificación</div>
+                    </div>
+                </div>
             </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">⚡</div>
-                <h3>Aprobación Rápida</h3>
-                <p>Respuesta garantizada en menos de 24 horas. Tu tiempo es valioso.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">💰</div>
-                <h3>Tasas Competitivas</h3>
-                <p>Las mejores tasas del mercado sin comisiones ocultas ni letra pequeña.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">👤</div>
-                <h3>Sin Aval</h3>
-                <p>No necesitas fiador ni garantía. Tu palabra y tu INE son suficientes.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">📱</div>
-                <h3>100% Digital</h3>
-                <p>Todo el proceso desde tu celular. Sin filas, sin papeleo, sin complicaciones.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">🔒</div>
-                <h3>Máxima Seguridad</h3>
-                <p>Tus datos protegidos con encriptación de nivel bancario.</p>
+            <div class="hero-card">
+                <h3>💰 Calcula tu crédito</h3>
+                <div class="amount-display">$50,000</div>
+                <div class="slider-container">
+                    <input type="range" class="slider" min="5000" max="5000000" value="50000">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:#64748b;margin-top:5px;">
+                        <span>$5,000</span>
+                        <span>$5,000,000</span>
+                    </div>
+                </div>
+                <div style="background:#f0fdf4;padding:15px;border-radius:10px;text-align:center;margin:20px 0;">
+                    <div style="font-size:14px;color:#64748b;">Mensualidad estimada</div>
+                    <div style="font-size:28px;font-weight:800;color:#1B5E20;">$5,590/mes</div>
+                    <div style="font-size:12px;color:#64748b;">a 12 meses</div>
+                </div>
+                <a href="#" style="display:block;background:#1B5E20;color:white;text-align:center;padding:15px;border-radius:10px;text-decoration:none;font-weight:600;">Solicitar ahora →</a>
             </div>
         </div>
     </section>
 
-    <section class="how-it-works" id="proceso">
-        <h2>¿Cómo funciona?</h2>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h3>Descarga la app</h3>
-                    <p>Disponible para Android. Regístrate con tu correo y crea tu cuenta en minutos.</p>
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir CrediFácil?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Aprobación Rápida</h3>
+                    <p>Respuesta en menos de 24 horas. Sin largas filas ni papeleo excesivo.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>100% Seguro</h3>
+                    <p>Tu información protegida con encriptación bancaria. Regulados por CONDUSEF.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💳</div>
+                    <h3>Sin Buró</h3>
+                    <p>Para montos menores a $100,000 no consultamos tu historial crediticio.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Tasas Competitivas</h3>
+                    <p>Desde 2.2% mensual. Sin comisiones ocultas ni letra pequeña.</p>
                 </div>
             </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h3>Verifica tu identidad</h3>
-                    <p>Sube fotos de tu INE y una selfie. Es rápido y seguro.</p>
+        </div>
+    </section>
+
+    <section class="how-it-works" id="how">
+        <div class="container">
+            <h2 class="section-title">¿Cómo funciona?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Descarga la App</h3>
+                    <p>Disponible para Android. Regístrate en menos de 2 minutos.</p>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h3>Solicita tu crédito</h3>
-                    <p>Elige el monto que necesitas y el plazo que más te convenga.</p>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Sube tus documentos</h3>
+                    <p>INE, comprobante de domicilio y de ingresos. Todo desde tu celular.</p>
                 </div>
-            </div>
-            <div class="step">
-                <div class="step-number">4</div>
-                <div class="step-content">
+                <div class="step">
+                    <div class="step-number">3</div>
                     <h3>Recibe tu dinero</h3>
-                    <p>Una vez aprobado, el dinero se deposita directo a tu cuenta bancaria.</p>
+                    <p>Aprobación en 24 hrs y depósito directo a tu cuenta bancaria.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="trust">
-        <h2>Avalados por las mejores instituciones</h2>
-        <div class="badges">
-            <div class="badge">
-                <span class="badge-icon">🏛️</span>
-                <span>Regulados por CONDUSEF</span>
-            </div>
-            <div class="badge">
-                <span class="badge-icon">🔐</span>
-                <span>Certificación ISO 27001</span>
-            </div>
-            <div class="badge">
-                <span class="badge-icon">🏆</span>
-                <span>Premio Inclusión Financiera 2024</span>
-            </div>
-            <div class="badge">
-                <span class="badge-icon">✓</span>
-                <span>Miembros de ASOFOM</span>
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Necesitaba $80,000 para mi negocio y en menos de 48 horas ya tenía el dinero en mi cuenta. Excelente servicio."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">R</div>
+                        <div class="author-info">
+                            <h4>Roberto Martínez</h4>
+                            <p>Empresario · Monterrey · Julio 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"La mejor tasa que encontré después de comparar con 5 bancos. Muy transparentes con los costos."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">M</div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <p>Contadora · CDMX · Julio 2026</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p class="testimonial-text">"Sin tanto papeleo como en el banco. Todo lo hice desde la app en mi celular. Muy recomendado."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">C</div>
+                        <div class="author-info">
+                            <h4>Carlos López</h4>
+                            <p>Ingeniero · Guadalajara · Junio 2026</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <section class="cta-section">
-        <h2>¿Listo para tu crédito?</h2>
-        <p>Únete a más de 1 millón de mexicanos que ya confían en CrediFácil</p>
-        <a href="#" class="cta-button">Comenzar ahora</a>
+        <div class="container">
+            <h2>¿Listo para obtener tu crédito?</h2>
+            <p>Únete a más de 50,000 mexicanos que ya confiaron en CrediFácil</p>
+            <a href="#" class="cta-big-btn">Solicitar Mi Crédito Ahora</a>
+        </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>CrediFácil</h4>
-                <p style="opacity: 0.8; font-size: 14px;">Créditos al alcance de todos. Fácil, rápido y seguro.</p>
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>CrediFácil</h3>
+                    <p>Tu aliado financiero de confianza desde 2019. Más de 50,000 créditos otorgados a mexicanos que confían en nosotros.</p>
+                    <p style="margin-top:15px;">📞 800-CREDI-FACIL (800-273-3432)</p>
+                    <p>📧 contacto@credifacil.com.mx</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Empresa</h4>
+                    <a href="#">Sobre nosotros</a>
+                    <a href="#">Trabaja con nosotros</a>
+                    <a href="#">Blog financiero</a>
+                    <a href="#">Prensa</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <a href="terminos.html">Términos y condiciones</a>
+                    <a href="privacidad.html">Aviso de privacidad</a>
+                    <a href="#">CAT promedio</a>
+                    <a href="#">Contrato de adhesión</a>
+                </div>
+                <div class="footer-links">
+                    <h4>Ayuda</h4>
+                    <a href="#">Preguntas frecuentes</a>
+                    <a href="#">Centro de ayuda</a>
+                    <a href="#">Contacto</a>
+                    <a href="#">CONDUSEF</a>
+                </div>
             </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <a href="terminos.html">Términos y Condiciones</a>
-                <a href="privacidad.html">Aviso de Privacidad</a>
+            <div class="footer-bottom">
+                <p>© 2024-2026 CrediFácil S.A.P.I. de C.V., SOFOM E.N.R. Todos los derechos reservados.</p>
+                <div class="certifications">
+                    <span class="cert-badge">🔒 SSL Seguro</span>
+                    <span class="cert-badge">CONDUSEF</span>
+                    <span class="cert-badge">CNBV</span>
+                </div>
             </div>
-            <div class="footer-section">
-                <h4>Contacto</h4>
-                <a href="tel:8002733432">📞 800-273-3432</a>
-                <a href="mailto:contacto@credifacil.mx">📧 contacto@credifacil.mx</a>
-            </div>
-            <div class="footer-section">
-                <h4>Horario</h4>
-                <p style="opacity: 0.8; font-size: 14px;">Lunes a Viernes<br>9:00 - 18:00 hrs</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2024 CrediFácil Servicios Financieros S.A. de C.V. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        const slider = document.querySelector('.slider');
+        const amountDisplay = document.querySelector('.amount-display');
+        const monthlyDisplay = document.querySelector('[style*="font-size:28px"]');
+        
+        slider.addEventListener('input', function() {
+            const amount = parseInt(this.value);
+            amountDisplay.textContent = '$' + amount.toLocaleString('es-MX');
+            const monthly = Math.round(amount * 0.112);
+            monthlyDisplay.textContent = '$' + monthly.toLocaleString('es-MX') + '/mes';
+        });
+    </script>
 </body>
 </html>
