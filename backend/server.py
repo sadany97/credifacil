@@ -19,10 +19,34 @@ import traceback
 import platform
 import psutil
 from pathlib import Path
+import threading
+import time
+import httpx
 
 load_dotenv()
 
 app = FastAPI(title="CrediFácil API")
+
+# ============================================
+# AUTO-PING PARA MANTENER SERVIDOR ACTIVO 24/7
+# ============================================
+def keep_alive():
+    """Hace ping al servidor cada 10 minutos para evitar que se duerma"""
+    while True:
+        try:
+            time.sleep(600)  # 10 minutos
+            # Ping interno al health endpoint
+            with httpx.Client(timeout=30) as client:
+                response = client.get("https://credifacil-api-cr8u.onrender.com/api/health")
+                print(f"[KEEP-ALIVE] Ping OK: {response.status_code}")
+        except Exception as e:
+            print(f"[KEEP-ALIVE] Error: {e}")
+
+# Iniciar thread de keep-alive en producción
+if os.getenv("RENDER") or "onrender" in os.getenv("RENDER_EXTERNAL_URL", ""):
+    keep_alive_thread = threading.Thread(target=keep_alive, daemon=True)
+    keep_alive_thread.start()
+    print("[KEEP-ALIVE] Sistema de auto-ping iniciado")
 
 # Servir archivos estáticos (páginas web)
 STATIC_DIR = Path(__file__).parent / "static"
