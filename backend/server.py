@@ -1597,8 +1597,6 @@ async def export_users_pdf(current_user: dict = Depends(get_admin_user)):
     
     # Admin ve todos los clientes
     users = list(users_collection.find({"role": "user"}).sort("name", 1).limit(5000))
-        else:
-            users = []
     
     # Crear PDF en memoria
     buffer = io.BytesIO()
