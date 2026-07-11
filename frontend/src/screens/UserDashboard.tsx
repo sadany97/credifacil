@@ -29,7 +29,6 @@ import {
   AppointmentScheduler,
   CancellationAlert,
   ProgressChart,
-  RecoveryCalculator,
   NotificationBell,
   CaseTimeline,
   ChatModal,
@@ -40,6 +39,7 @@ import {
   UserMessagesModal,
   CreditApprovalAnimation,
 } from '../components';
+import LoanCalculator from '../components/LoanCalculator';
 
 export const UserDashboard: React.FC = () => {
   const { user, token, logout } = useAuth();
@@ -557,7 +557,7 @@ export const UserDashboard: React.FC = () => {
       />
 
       {/* Calculadora de Crédito */}
-      <RecoveryCalculator
+      <LoanCalculator
         visible={calculatorVisible}
         onClose={() => setCalculatorVisible(false)}
       />

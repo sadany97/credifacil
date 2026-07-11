@@ -59,6 +59,7 @@ login_attempts_collection = db["login_attempts"]  # Intentos de login para bloqu
 password_reset_collection = db["password_reset"]  # Tokens de crédito de contraseña
 user_photos_collection = db["user_photos"]  # Fotos de perfil de usuarios
 admin_notifications_collection = db["admin_notifications"]  # Notificaciones para el admin principal
+loan_simulations_collection = db["loan_simulations"]  # Simulaciones de crédito de usuarios
 
 # === INICIALIZAR ADMIN DE CREDIFÁCIL ===
 def init_credifacil_admin():
@@ -3811,6 +3812,116 @@ async def get_users_by_status(status: str, current_user = Depends(get_current_us
         })
     
     return result
+
+
+# ============================================
+# 5.5 SIMULACIONES DE CRÉDITO
+# ============================================
+
+class LoanSimulationCreate(BaseModel):
+    userId: Optional[str] = None
+    userName: Optional[str] = None
+    userEmail: Optional[str] = None
+    amount: float
+    term: int
+    monthlyPayment: float
+    totalPayment: float
+    totalInterest: float
+    createdAt: Optional[str] = None
+
+@app.post("/api/users/loan-simulation")
+async def save_loan_simulation(simulation: LoanSimulationCreate):
+    """Guardar simulación de crédito del usuario y notificar al admin"""
+    try:
+        sim_doc = {
+            "user_id": simulation.userId,
+            "user_name": simulation.userName,
+            "user_email": simulation.userEmail,
+            "amount": simulation.amount,
+            "term": simulation.term,
+            "monthly_payment": simulation.monthlyPayment,
+            "total_payment": simulation.totalPayment,
+            "total_interest": simulation.totalInterest,
+            "status": "pending",  # pending, contacted, approved, rejected
+            "created_at": datetime.utcnow(),
+        }
+        
+        result = loan_simulations_collection.insert_one(sim_doc)
+        
+        # Crear notificación para el admin
+        admin_notification = {
+            "type": "loan_simulation",
+            "title": "Nueva Simulación de Crédito",
+            "message": f"{simulation.userName or 'Usuario'} solicitó un crédito de ${simulation.amount:,.0f} a {simulation.term} meses",
+            "user_id": simulation.userId,
+            "user_name": simulation.userName,
+            "user_email": simulation.userEmail,
+            "amount": simulation.amount,
+            "term": simulation.term,
+            "monthly_payment": simulation.monthlyPayment,
+            "simulation_id": str(result.inserted_id),
+            "read": False,
+            "created_at": datetime.utcnow(),
+        }
+        admin_notifications_collection.insert_one(admin_notification)
+        
+        # También actualizar el perfil del usuario con su última simulación
+        if simulation.userId:
+            profiles_collection.update_one(
+                {"user_id": simulation.userId},
+                {"$set": {
+                    "last_simulation": {
+                        "amount": simulation.amount,
+                        "term": simulation.term,
+                        "monthly_payment": simulation.monthlyPayment,
+                        "created_at": datetime.utcnow()
+                    }
+                }}
+            )
+        
+        return {"message": "Simulación guardada", "id": str(result.inserted_id)}
+    except Exception as e:
+        print(f"Error guardando simulación: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/admin/loan-simulations")
+async def get_loan_simulations(current_user = Depends(get_current_user)):
+    """Obtener todas las simulaciones de crédito (solo admin)"""
+    if current_user.get("role") not in ["admin", "sub_admin"]:
+        raise HTTPException(status_code=403, detail="No autorizado")
+    
+    simulations = list(loan_simulations_collection.find().sort("created_at", -1).limit(100))
+    
+    result = []
+    for sim in simulations:
+        result.append({
+            "id": str(sim["_id"]),
+            "user_id": sim.get("user_id"),
+            "user_name": sim.get("user_name"),
+            "user_email": sim.get("user_email"),
+            "amount": sim.get("amount"),
+            "term": sim.get("term"),
+            "monthly_payment": sim.get("monthly_payment"),
+            "total_payment": sim.get("total_payment"),
+            "total_interest": sim.get("total_interest"),
+            "status": sim.get("status", "pending"),
+            "created_at": sim.get("created_at").isoformat() if sim.get("created_at") else None
+        })
+    
+    return result
+
+@app.put("/api/admin/loan-simulations/{simulation_id}/status")
+async def update_simulation_status(simulation_id: str, status: str, current_user = Depends(get_current_user)):
+    """Actualizar estado de simulación"""
+    if current_user.get("role") not in ["admin", "sub_admin"]:
+        raise HTTPException(status_code=403, detail="No autorizado")
+    
+    loan_simulations_collection.update_one(
+        {"_id": ObjectId(simulation_id)},
+        {"$set": {"status": status, "updated_at": datetime.utcnow()}}
+    )
+    
+    return {"message": "Estado actualizado"}
 
 
 # ============================================
