@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -11,9 +11,9 @@ import {
   Alert,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import AuthContext from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 import { COLORS } from '../constants';
-import api from '../services/api';
+import { apiCall } from '../services/api';
 
 interface AmortizationRow {
   month: number;
@@ -40,7 +40,7 @@ const LoanCalculator: React.FC<{ visible: boolean; onClose: () => void }> = ({
   visible,
   onClose,
 }) => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [amount, setAmount] = useState('50000');
   const [selectedTerm, setSelectedTerm] = useState(12);
   const [amortizationTable, setAmortizationTable] = useState<AmortizationRow[]>([]);
@@ -127,7 +127,7 @@ const LoanCalculator: React.FC<{ visible: boolean; onClose: () => void }> = ({
         totalInterest,
       };
 
-      await api.post('/users/loan-simulation', simulation);
+      await apiCall('/users/loan-simulation', 'POST', simulation);
 
       Alert.alert(
         '✅ Solicitud Enviada',
