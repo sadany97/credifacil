@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { apiCall, warmUpServer, startKeepAlive, stopKeepAlive } from '../services/api';
@@ -21,7 +21,6 @@ interface AuthContextType {
   logout: () => void;
   isLoading: boolean;
   serverReady: boolean;
-  isAuthenticated: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -39,82 +38,44 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Empieza en true para cargar credenciales
   const [serverReady, setServerReady] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  // Función para guardar credenciales en storage
-  const saveAuthToStorage = useCallback(async (authToken: string, authUser: User) => {
-    try {
-      await AsyncStorage.setItem(AUTH_TOKEN_KEY, authToken);
-      await AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(authUser));
-      console.log('[Auth] Credenciales guardadas en storage');
-    } catch (error) {
-      console.error('[Auth] Error guardando credenciales:', error);
-    }
-  }, []);
-
-  // Función para limpiar credenciales del storage
-  const clearAuthFromStorage = useCallback(async () => {
-    try {
-      await AsyncStorage.removeItem(AUTH_TOKEN_KEY);
-      await AsyncStorage.removeItem(AUTH_USER_KEY);
-      console.log('[Auth] Credenciales eliminadas del storage');
-    } catch (error) {
-      console.error('[Auth] Error eliminando credenciales:', error);
-    }
-  }, []);
-
-  // Función para cargar credenciales guardadas
-  const loadStoredAuth = useCallback(async () => {
-    try {
-      const storedToken = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
-      const storedUser = await AsyncStorage.getItem(AUTH_USER_KEY);
-      
-      if (storedToken && storedUser) {
-        const parsedUser = JSON.parse(storedUser) as User;
-        console.log('[Auth] Credenciales recuperadas del storage:', parsedUser.email);
-        setToken(storedToken);
-        setUser(parsedUser);
-        setIsAuthenticated(true);
-        return true;
-      }
-    } catch (error) {
-      console.error('[Auth] Error cargando credenciales:', error);
-    }
-    return false;
-  }, []);
-
-  // Inicializar servidor y mantenerlo activo
+  // Cargar credenciales guardadas al inicio
   useEffect(() => {
     let mounted = true;
     
-    const initServer = async () => {
+    const initialize = async () => {
       try {
-        // Primero cargar credenciales guardadas
-        await loadStoredAuth();
+        // Cargar credenciales guardadas
+        const storedToken = await AsyncStorage.getItem(AUTH_TOKEN_KEY);
+        const storedUser = await AsyncStorage.getItem(AUTH_USER_KEY);
         
+        if (storedToken && storedUser && mounted) {
+          const parsedUser = JSON.parse(storedUser) as User;
+          console.log('[Auth] Credenciales recuperadas:', parsedUser.email);
+          setToken(storedToken);
+          setUser(parsedUser);
+        }
+        
+        // Despertar servidor
         const ready = await warmUpServer();
         if (mounted) {
           setServerReady(ready);
-          if (ready) {
-            startKeepAlive();
-          }
+          if (ready) startKeepAlive();
         }
-      } catch {
-        // Reintentar
-        if (mounted) {
-          setTimeout(initServer, 3000);
-        }
+      } catch (error) {
+        console.error('[Auth] Error en inicialización:', error);
+      } finally {
+        if (mounted) setIsLoading(false);
       }
     };
     
-    initServer();
+    initialize();
     
     // Manejar cuando la app vuelve al primer plano
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (nextAppState === 'active') {
-        // App volvió al primer plano - despertar servidor inmediatamente
         warmUpServer().then(ready => {
           if (mounted) setServerReady(ready);
         });
@@ -131,72 +92,66 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       stopKeepAlive();
       subscription?.remove();
     };
-  }, [loadStoredAuth]);
+  }, []);
 
   const login = async (email: string, password: string) => {
-    setIsLoading(true);
     try {
-      // Asegurar servidor despierto antes de login
       await warmUpServer();
       const data = await apiCall('/auth/login', 'POST', { email, password });
       console.log('[Auth] Login exitoso:', data.user?.email);
       
-      // Guardar en storage primero
-      await saveAuthToStorage(data.token, data.user);
+      // Guardar en storage
+      await AsyncStorage.setItem(AUTH_TOKEN_KEY, data.token);
+      await AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(data.user));
       
-      // Luego actualizar estado (esto disparará el re-render)
+      // Actualizar estado - ESTO DISPARA EL RE-RENDER
       setToken(data.token);
       setUser(data.user);
-      setIsAuthenticated(true);
-      
-      console.log('[Auth] Estado actualizado - usuario autenticado');
     } catch (error: any) {
       console.error('[Auth] Error en login:', error);
-      throw error; // Re-lanzar para que el componente de login maneje el error
-    } finally {
-      setIsLoading(false);
+      throw error;
     }
   };
 
   const register = async (email: string, password: string, name: string, phone: string) => {
-    setIsLoading(true);
     try {
-      // Asegurar servidor despierto antes de registro
       await warmUpServer();
       const data = await apiCall('/auth/register', 'POST', { email, password, name, phone });
-      console.log('[Auth] Registro exitoso:', data.user?.email, '- Token recibido:', !!data.token);
+      console.log('[Auth] Registro exitoso:', data.user?.email);
       
       if (!data.token || !data.user) {
         throw new Error('Respuesta inválida del servidor');
       }
       
-      // Guardar en storage primero
-      await saveAuthToStorage(data.token, data.user);
+      // Guardar en storage PRIMERO
+      await AsyncStorage.setItem(AUTH_TOKEN_KEY, data.token);
+      await AsyncStorage.setItem(AUTH_USER_KEY, JSON.stringify(data.user));
+      console.log('[Auth] Credenciales guardadas en storage');
       
-      // Luego actualizar estado (esto disparará el re-render y navegará automáticamente)
+      // Actualizar estado - ESTO DISPARA EL RE-RENDER Y NAVEGA AL DASHBOARD
       setToken(data.token);
       setUser(data.user);
-      setIsAuthenticated(true);
-      
-      console.log('[Auth] Estado actualizado después de registro - usuario:', data.user.email, '- autenticado:', true);
+      console.log('[Auth] Estado actualizado, usuario debería ver Dashboard ahora');
     } catch (error: any) {
       console.error('[Auth] Error en registro:', error);
       throw error;
-    } finally {
-      setIsLoading(false);
     }
   };
 
-  const logout = () => {
+  const logout = async () => {
     console.log('[Auth] Cerrando sesión');
-    clearAuthFromStorage();
+    try {
+      await AsyncStorage.removeItem(AUTH_TOKEN_KEY);
+      await AsyncStorage.removeItem(AUTH_USER_KEY);
+    } catch (error) {
+      console.error('[Auth] Error al limpiar storage:', error);
+    }
     setUser(null);
     setToken(null);
-    setIsAuthenticated(false);
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout, isLoading, serverReady, isAuthenticated }}>
+    <AuthContext.Provider value={{ user, token, login, register, logout, isLoading, serverReady }}>
       {children}
     </AuthContext.Provider>
   );

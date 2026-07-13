@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
 import { AuthProvider, useAuth } from '../src/contexts/AuthContext';
 import { COLORS } from '../src/constants';
@@ -6,23 +6,10 @@ import { ProfessionalLogo } from '../src/components';
 import { LoginScreen, UserDashboard, AdminDashboard } from '../src/screens';
 
 const AppContent: React.FC = () => {
-  const { user, isAuthenticated } = useAuth();
-  const [initializing, setInitializing] = useState(true);
+  const { user, isLoading } = useAuth();
 
-  useEffect(() => {
-    // Pequeño delay para permitir que el contexto cargue credenciales guardadas
-    const timer = setTimeout(() => {
-      setInitializing(false);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Log para debugging
-  useEffect(() => {
-    console.log('[AppContent] Estado actual - user:', user?.email, '- isAuthenticated:', isAuthenticated);
-  }, [user, isAuthenticated]);
-
-  if (initializing) {
+  // Mostrar loading mientras se cargan credenciales guardadas
+  if (isLoading) {
     return (
       <View style={styles.loadingContainer}>
         <ProfessionalLogo size="large" />
@@ -31,8 +18,8 @@ const AppContent: React.FC = () => {
     );
   }
 
-  // Mostrar LoginScreen si no hay usuario autenticado
-  if (!user || !isAuthenticated) {
+  // Sin usuario = mostrar login
+  if (!user) {
     return <LoginScreen />;
   }
 
