@@ -3145,6 +3145,181 @@ async def home_page():
         return HTMLResponse(content=file_path.read_text(encoding='utf-8'))
     return HTMLResponse(content="<h1>CrediFácil</h1><p>API funcionando correctamente</p>")
 
+# ============================================
+# PÁGINAS LEGALES
+# ============================================
+@app.get("/privacidad.html", response_class=HTMLResponse)
+@app.get("/api/privacidad.html", response_class=HTMLResponse)
+async def privacy_policy():
+    """Aviso de Privacidad"""
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aviso de Privacidad - CrediFácil</title>
+        <style>
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
+            .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #16a34a, #15803d); color: white; padding: 30px 20px; text-align: center; border-radius: 12px; margin-bottom: 20px; }
+            .header h1 { font-size: 24px; margin-bottom: 5px; }
+            .header p { opacity: 0.9; font-size: 14px; }
+            .card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+            .card h2 { color: #16a34a; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #16a34a; padding-bottom: 8px; }
+            .card p, .card li { font-size: 14px; margin-bottom: 10px; }
+            .card ul { padding-left: 20px; }
+            .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Aviso de Privacidad</h1>
+                <p>CrediFácil Financiero, S.A. de C.V.</p>
+            </div>
+            
+            <div class="card">
+                <h2>1. Identidad del Responsable</h2>
+                <p>CrediFácil Financiero, S.A. de C.V. (en adelante "CrediFácil") con domicilio en Ciudad de México, México, es responsable del tratamiento de sus datos personales.</p>
+            </div>
+            
+            <div class="card">
+                <h2>2. Datos Personales Recabados</h2>
+                <p>Para las finalidades señaladas, recabamos los siguientes datos personales:</p>
+                <ul>
+                    <li>Nombre completo</li>
+                    <li>Correo electrónico</li>
+                    <li>Número telefónico</li>
+                    <li>Información financiera para evaluación crediticia</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>3. Finalidades del Tratamiento</h2>
+                <p>Sus datos personales serán utilizados para:</p>
+                <ul>
+                    <li>Evaluación y otorgamiento de créditos</li>
+                    <li>Gestión de su cuenta y servicios contratados</li>
+                    <li>Comunicación sobre productos y promociones</li>
+                    <li>Cumplimiento de obligaciones legales</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>4. Derechos ARCO</h2>
+                <p>Usted tiene derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales. Para ejercer estos derechos, envíe un correo a: <strong>privacidad@credifacil.com</strong></p>
+            </div>
+            
+            <div class="card">
+                <h2>5. Seguridad de Datos</h2>
+                <p>CrediFácil implementa medidas de seguridad administrativas, técnicas y físicas para proteger sus datos personales contra daño, pérdida, alteración, destrucción o uso no autorizado.</p>
+            </div>
+            
+            <div class="footer">
+                <p>Última actualización: Enero 2026</p>
+                <p>© 2026 CrediFácil Financiero, S.A. de C.V. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content)
+
+@app.get("/terminos.html", response_class=HTMLResponse)
+@app.get("/api/terminos.html", response_class=HTMLResponse)
+async def terms_conditions():
+    """Términos y Condiciones"""
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Términos y Condiciones - CrediFácil</title>
+        <style>
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f5; color: #333; line-height: 1.6; }
+            .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+            .header { background: linear-gradient(135deg, #16a34a, #15803d); color: white; padding: 30px 20px; text-align: center; border-radius: 12px; margin-bottom: 20px; }
+            .header h1 { font-size: 24px; margin-bottom: 5px; }
+            .header p { opacity: 0.9; font-size: 14px; }
+            .card { background: white; border-radius: 12px; padding: 25px; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+            .card h2 { color: #16a34a; font-size: 18px; margin-bottom: 15px; border-bottom: 2px solid #16a34a; padding-bottom: 8px; }
+            .card p, .card li { font-size: 14px; margin-bottom: 10px; }
+            .card ul { padding-left: 20px; }
+            .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Términos y Condiciones</h1>
+                <p>CrediFácil Financiero, S.A. de C.V.</p>
+            </div>
+            
+            <div class="card">
+                <h2>1. Aceptación de Términos</h2>
+                <p>Al utilizar la aplicación CrediFácil, usted acepta estos términos y condiciones en su totalidad. Si no está de acuerdo, le pedimos no utilizar nuestros servicios.</p>
+            </div>
+            
+            <div class="card">
+                <h2>2. Servicios Ofrecidos</h2>
+                <p>CrediFácil ofrece servicios de crédito y financiamiento, incluyendo:</p>
+                <ul>
+                    <li>Evaluación crediticia</li>
+                    <li>Otorgamiento de préstamos personales</li>
+                    <li>Simulador de créditos</li>
+                    <li>Gestión de pagos y cuenta</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>3. Requisitos del Usuario</h2>
+                <ul>
+                    <li>Ser mayor de 18 años</li>
+                    <li>Proporcionar información veraz y actualizada</li>
+                    <li>Mantener la confidencialidad de sus credenciales</li>
+                    <li>Cumplir con las obligaciones de pago acordadas</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>4. Tasas y Comisiones</h2>
+                <p>Las tasas de interés y comisiones aplicables serán informadas de manera clara antes de la contratación de cualquier crédito. El CAT (Costo Anual Total) se calculará conforme a las disposiciones de CONDUSEF.</p>
+            </div>
+            
+            <div class="card">
+                <h2>5. Responsabilidades</h2>
+                <p>CrediFácil no será responsable por:</p>
+                <ul>
+                    <li>Uso indebido de la aplicación por parte del usuario</li>
+                    <li>Información incorrecta proporcionada por el usuario</li>
+                    <li>Fallas técnicas fuera de nuestro control</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>6. Modificaciones</h2>
+                <p>CrediFácil se reserva el derecho de modificar estos términos en cualquier momento. Los cambios serán notificados a través de la aplicación.</p>
+            </div>
+            
+            <div class="card">
+                <h2>7. Contacto</h2>
+                <p>Para dudas o aclaraciones sobre estos términos, contáctenos en: <strong>soporte@credifacil.com</strong></p>
+            </div>
+            
+            <div class="footer">
+                <p>Última actualización: Enero 2026</p>
+                <p>© 2026 CrediFácil Financiero, S.A. de C.V. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content)
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8001)
