@@ -3148,6 +3148,248 @@ async def home_page():
 # ============================================
 # PÁGINAS LEGALES
 # ============================================
+@app.get("/guia-instalacion", response_class=HTMLResponse)
+@app.get("/api/guia-instalacion", response_class=HTMLResponse)
+async def installation_guide():
+    """Guía de Instalación CrediFácil"""
+    html_content = """
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Guía de Instalación - CrediFácil</title>
+        <style>
+            * { box-sizing: border-box; margin: 0; padding: 0; }
+            body { 
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+                background: linear-gradient(180deg, #f0fdf4 0%, #dcfce7 100%);
+                min-height: 100vh;
+                padding: 20px;
+            }
+            .guide-container {
+                max-width: 420px;
+                margin: 0 auto;
+                background: white;
+                border-radius: 24px;
+                box-shadow: 0 20px 60px rgba(22, 163, 74, 0.15);
+                overflow: hidden;
+            }
+            .header {
+                background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+                color: white;
+                padding: 30px 25px;
+                text-align: center;
+            }
+            .logo {
+                font-size: 36px;
+                font-weight: 800;
+                margin-bottom: 5px;
+            }
+            .logo span { color: #86efac; }
+            .subtitle {
+                font-size: 14px;
+                opacity: 0.9;
+            }
+            .title-section {
+                background: #f0fdf4;
+                padding: 20px 25px;
+                text-align: center;
+                border-bottom: 2px solid #dcfce7;
+            }
+            .title-section h1 {
+                color: #15803d;
+                font-size: 22px;
+                font-weight: 700;
+            }
+            .title-section p {
+                color: #166534;
+                font-size: 13px;
+                margin-top: 5px;
+            }
+            .steps-container {
+                padding: 25px;
+            }
+            .step {
+                display: flex;
+                align-items: flex-start;
+                gap: 15px;
+                margin-bottom: 25px;
+                padding-bottom: 25px;
+                border-bottom: 1px dashed #e5e7eb;
+            }
+            .step:last-child {
+                border-bottom: none;
+                margin-bottom: 0;
+                padding-bottom: 0;
+            }
+            .step-number {
+                width: 44px;
+                height: 44px;
+                background: linear-gradient(135deg, #16a34a 0%, #22c55e 100%);
+                color: white;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 800;
+                font-size: 18px;
+                flex-shrink: 0;
+                box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+            }
+            .step-content h3 {
+                color: #15803d;
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 6px;
+            }
+            .step-content p {
+                color: #4b5563;
+                font-size: 13px;
+                line-height: 1.5;
+            }
+            .step-content .highlight {
+                background: #dcfce7;
+                color: #166534;
+                padding: 2px 8px;
+                border-radius: 4px;
+                font-weight: 600;
+                font-size: 12px;
+            }
+            .warning-box {
+                background: #fef3c7;
+                border: 1px solid #fbbf24;
+                border-radius: 12px;
+                padding: 15px;
+                margin: 0 25px 25px;
+                display: flex;
+                align-items: flex-start;
+                gap: 12px;
+            }
+            .warning-icon {
+                font-size: 24px;
+                flex-shrink: 0;
+            }
+            .warning-text {
+                font-size: 12px;
+                color: #92400e;
+                line-height: 1.5;
+            }
+            .warning-text strong {
+                color: #78350f;
+            }
+            .footer {
+                background: #15803d;
+                color: white;
+                padding: 20px 25px;
+                text-align: center;
+            }
+            .footer p {
+                font-size: 12px;
+                opacity: 0.9;
+                margin-bottom: 10px;
+            }
+            .footer .contact {
+                font-size: 14px;
+                font-weight: 600;
+            }
+            .badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+                background: rgba(255,255,255,0.15);
+                padding: 8px 16px;
+                border-radius: 20px;
+                margin-top: 15px;
+                font-size: 12px;
+            }
+            .android-icon {
+                width: 18px;
+                height: 18px;
+                background: #a4c639;
+                border-radius: 4px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="guide-container">
+            <div class="header">
+                <div class="logo">Credi<span>Fácil</span></div>
+                <div class="subtitle">Tu aliado financiero de confianza</div>
+            </div>
+            
+            <div class="title-section">
+                <h1>📱 Guía de Instalación</h1>
+                <p>Sigue estos sencillos pasos para instalar la app</p>
+            </div>
+            
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Descarga el archivo APK</h3>
+                        <p>Descarga el archivo <span class="highlight">CrediFacil.apk</span> desde el enlace que te compartimos por WhatsApp o correo.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Permite orígenes desconocidos</h3>
+                        <p>Ve a <strong>Ajustes → Seguridad</strong> y activa <span class="highlight">Orígenes desconocidos</span> o <span class="highlight">Instalar apps desconocidas</span>.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Abre el archivo descargado</h3>
+                        <p>Busca el archivo en tu carpeta de <strong>Descargas</strong> y tócalo para iniciar la instalación.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Confirma la instalación</h3>
+                        <p>Presiona <span class="highlight">Instalar</span> cuando aparezca el mensaje. Espera unos segundos a que termine.</p>
+                    </div>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>¡Listo! Abre CrediFácil</h3>
+                        <p>Busca el ícono verde de <strong>CrediFácil</strong> en tu pantalla y regístrate para comenzar.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="warning-box">
+                <div class="warning-icon">⚠️</div>
+                <div class="warning-text">
+                    <strong>Importante:</strong> Si tu teléfono muestra una alerta de seguridad, es normal. Solo presiona "Instalar de todos modos" para continuar.
+                </div>
+            </div>
+            
+            <div class="footer">
+                <p>¿Necesitas ayuda con la instalación?</p>
+                <div class="contact">📞 Llámanos al 800-CREDIFACIL</div>
+                <div class="badge">
+                    <div class="android-icon">🤖</div>
+                    Compatible con Android 8.0+
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>
+    """
+    return HTMLResponse(content=html_content)
+
 @app.get("/privacidad.html", response_class=HTMLResponse)
 @app.get("/api/privacidad.html", response_class=HTMLResponse)
 async def privacy_policy():
