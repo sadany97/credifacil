@@ -31,25 +31,36 @@ export const checkBiometricAvailability = async (): Promise<{
     const enrolled = await LocalAuthentication.isEnrolledAsync();
     console.log('[Biometrics] Enrolled:', enrolled);
 
-    // Obtener tipos de autenticación soportados
-    const types = await LocalAuthentication.supportedAuthenticationTypesAsync();
-    console.log('[Biometrics] Types:', types);
+    // Obtener tipos de autenticación soportados - PROTEGIDO
+    let types: LocalAuthentication.AuthenticationType[] = [];
+    try {
+      types = await LocalAuthentication.supportedAuthenticationTypesAsync();
+      console.log('[Biometrics] Types:', types);
+    } catch (typeError) {
+      console.log('[Biometrics] Error getting types, using default');
+      types = [];
+    }
     
-    let biometricType = 'Biométrico';
+    let biometricType = 'Huella Digital';
     
-    // En Android, la huella digital es más común
+    // Determinar tipo de biometría de forma segura
     if (Platform.OS === 'android') {
-      if (types.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
-        biometricType = 'Huella Digital';
-      } else if (types.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
-        biometricType = 'Reconocimiento Facial';
+      // En Android, asumimos huella digital por defecto
+      if (types && types.length > 0) {
+        if (types.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
+          biometricType = 'Huella Digital';
+        } else if (types.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
+          biometricType = 'Reconocimiento Facial';
+        }
       }
     } else {
       // iOS
-      if (types.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
-        biometricType = 'Face ID';
-      } else if (types.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
-        biometricType = 'Touch ID';
+      if (types && types.length > 0) {
+        if (types.includes(LocalAuthentication.AuthenticationType.FACIAL_RECOGNITION)) {
+          biometricType = 'Face ID';
+        } else if (types.includes(LocalAuthentication.AuthenticationType.FINGERPRINT)) {
+          biometricType = 'Touch ID';
+        }
       }
     }
 
@@ -63,7 +74,8 @@ export const checkBiometricAvailability = async (): Promise<{
     return { available: true, biometricType, enrolled: true, hardwareExists: true };
   } catch (error) {
     console.error('[Biometrics] Error checking availability:', error);
-    return { available: false, biometricType: 'none', enrolled: false, hardwareExists: false };
+    // Retornar valores seguros en caso de error
+    return { available: false, biometricType: 'Huella Digital', enrolled: false, hardwareExists: false };
   }
 };
 
@@ -100,7 +112,6 @@ export const authenticateWithBiometrics = async (): Promise<BiometricResult> => 
       cancelLabel: 'Cancelar',
       fallbackLabel: 'Usar contraseña',
       disableDeviceFallback: false,
-      // En Android, esto es importante para mostrar el diálogo correcto
       requireConfirmation: Platform.OS === 'android',
     });
 
@@ -127,7 +138,7 @@ export const authenticateWithBiometrics = async (): Promise<BiometricResult> => 
     }
   } catch (error: any) {
     console.error('[Biometrics] Authentication error:', error);
-    return { success: false, error: error.message || 'Error de autenticación biométrica' };
+    return { success: false, error: 'Error de autenticación biométrica' };
   }
 };
 
@@ -140,11 +151,7 @@ export const promptBiometricSetup = (biometricType: string): void => {
       { 
         text: 'Abrir Ajustes', 
         onPress: () => {
-          if (Platform.OS === 'android') {
-            Linking.openSettings();
-          } else {
-            Linking.openURL('App-Prefs:root=TOUCHID_PASSCODE');
-          }
+          Linking.openSettings();
         }
       }
     ]
