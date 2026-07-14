@@ -57,17 +57,22 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setToken(storedToken);
           setUser(parsedUser);
         }
-        
-        // Despertar servidor
+      } catch (error) {
+        console.error('[Auth] Error cargando credenciales:', error);
+      } finally {
+        // IMPORTANTE: Quitar loading INMEDIATAMENTE para mostrar la app
+        if (mounted) setIsLoading(false);
+      }
+      
+      // Despertar servidor EN SEGUNDO PLANO (no bloquea la app)
+      try {
         const ready = await warmUpServer();
         if (mounted) {
           setServerReady(ready);
           if (ready) startKeepAlive();
         }
       } catch (error) {
-        console.error('[Auth] Error en inicialización:', error);
-      } finally {
-        if (mounted) setIsLoading(false);
+        console.error('[Auth] Error conectando servidor:', error);
       }
     };
     
