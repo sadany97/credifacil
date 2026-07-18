@@ -5124,3 +5124,78 @@ async def get_locked_accounts(admin = Depends(get_admin_user)):
         })
     
     return {"locked_accounts": accounts, "total": len(accounts)}
+
+# ============================================
+# SISTEMA DE MONITOREO AUTOMÁTICO
+# ============================================
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+ALERT_EMAIL = "aguiladaniel14@gmail.com"
+MONITORED_SERVICES = [
+    {"name": "Recuperación de Capital", "url": "https://recuperacion-capital-1.onrender.com/api/health"},
+    {"name": "CrediFácil", "url": "https://credifacil-api-cr8u.onrender.com/api/health"},
+]
+
+# Estado de los servicios (para evitar alertas duplicadas)
+service_status = {}
+
+async def check_service_health(service_name: str, service_url: str) -> bool:
+    """Verificar si un servicio está activo"""
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            response = await client.get(service_url)
+            return response.status_code == 200
+    except Exception as e:
+        print(f"[Monitor] Error checking {service_name}: {e}")
+        return False
+
+async def send_alert_email(service_name: str, is_down: bool):
+    """Enviar alerta por email (usando webhook alternativo)"""
+    status = "CAÍDO ❌" if is_down else "RECUPERADO ✅"
+    print(f"[Monitor] ALERTA: {service_name} está {status}")
+    # Log de la alerta - en producción se enviaría por email/webhook
+    
+@app.get("/api/monitor/status")
+async def monitor_status():
+    """Ver estado de todos los servicios monitoreados"""
+    results = []
+    for service in MONITORED_SERVICES:
+        is_healthy = await check_service_health(service["name"], service["url"])
+        results.append({
+            "name": service["name"],
+            "url": service["url"],
+            "status": "healthy" if is_healthy else "down",
+            "checked_at": datetime.utcnow().isoformat()
+        })
+    return {"services": results, "alert_email": ALERT_EMAIL}
+
+@app.get("/api/monitor/check")
+async def run_health_check():
+    """Ejecutar verificación de salud y enviar alertas si es necesario"""
+    global service_status
+    alerts = []
+    
+    for service in MONITORED_SERVICES:
+        is_healthy = await check_service_health(service["name"], service["url"])
+        previous_status = service_status.get(service["name"], True)
+        
+        # Si el estado cambió, enviar alerta
+        if is_healthy != previous_status:
+            await send_alert_email(service["name"], not is_healthy)
+            alerts.append({
+                "service": service["name"],
+                "status": "recovered" if is_healthy else "down",
+                "time": datetime.utcnow().isoformat()
+            })
+        
+        service_status[service["name"]] = is_healthy
+    
+    return {
+        "checked": len(MONITORED_SERVICES),
+        "alerts_triggered": len(alerts),
+        "alerts": alerts,
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
