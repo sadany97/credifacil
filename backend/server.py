@@ -5172,18 +5172,7 @@ async def send_alert_email(service_name: str, is_down: bool):
                     "Tags": "warning" if is_down else "white_check_mark"
                 }
             )
-            print(f"[Monitor] Notificación enviada a ntfy.sh")
-            
-            # También enviar por email via ntfy.sh
-            await client.post(
-                "https://ntfy.sh/credifacil-alertas-2026",
-                content=message.encode('utf-8'),
-                headers={
-                    "Title": title,
-                    "Email": ALERT_EMAIL
-                }
-            )
-            print(f"[Monitor] Email enviado a {ALERT_EMAIL}")
+            print(f"[Monitor] Notificación push enviada a ntfy.sh")
     except Exception as e:
         print(f"[Monitor] Error enviando alerta: {e}")
     
