@@ -5152,10 +5152,40 @@ async def check_service_health(service_name: str, service_url: str) -> bool:
         return False
 
 async def send_alert_email(service_name: str, is_down: bool):
-    """Enviar alerta por email (usando webhook alternativo)"""
+    """Enviar alerta por notificación push usando ntfy.sh"""
     status = "CAÍDO ❌" if is_down else "RECUPERADO ✅"
+    title = f"🚨 {service_name} {status}"
+    message = f"El servicio {service_name} está {'CAÍDO' if is_down else 'FUNCIONANDO de nuevo'}.\n\nFecha: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}"
+    
     print(f"[Monitor] ALERTA: {service_name} está {status}")
-    # Log de la alerta - en producción se enviaría por email/webhook
+    
+    try:
+        # Enviar notificación push gratuita via ntfy.sh
+        async with httpx.AsyncClient() as client:
+            # Notificación al canal de monitoreo
+            await client.post(
+                "https://ntfy.sh/credifacil-alertas-2026",
+                content=message.encode('utf-8'),
+                headers={
+                    "Title": title,
+                    "Priority": "urgent" if is_down else "default",
+                    "Tags": "warning" if is_down else "white_check_mark"
+                }
+            )
+            print(f"[Monitor] Notificación enviada a ntfy.sh")
+            
+            # También enviar por email via ntfy.sh
+            await client.post(
+                "https://ntfy.sh/credifacil-alertas-2026",
+                content=message.encode('utf-8'),
+                headers={
+                    "Title": title,
+                    "Email": ALERT_EMAIL
+                }
+            )
+            print(f"[Monitor] Email enviado a {ALERT_EMAIL}")
+    except Exception as e:
+        print(f"[Monitor] Error enviando alerta: {e}")
     
 @app.get("/api/monitor/status")
 async def monitor_status():
