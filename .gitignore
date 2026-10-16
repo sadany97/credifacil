@@ -78,3 +78,7 @@ coverage/
 .cache/
 tmp/
 temp/
+
+# Web app export - incluir TODO aunque contenga node_modules en la ruta
+!backend/webapp/**
+frontend/web-dist/

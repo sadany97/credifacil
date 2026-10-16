@@ -5218,3 +5218,12 @@ async def run_health_check():
         "timestamp": datetime.utcnow().isoformat()
     }
 
+
+# ============================================
+# VERSIÓN WEB (para clientes sin instalar APK)
+# Debe ir AL FINAL para no interferir con las rutas /api
+# ============================================
+WEBAPP_DIR = Path(__file__).parent / "webapp"
+if WEBAPP_DIR.exists():
+    app.mount("/app", StaticFiles(directory=str(WEBAPP_DIR), html=True), name="webapp")
+    print("[WEBAPP] Versión web disponible en /app")

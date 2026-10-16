@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1200, height=628">
+    <title>Anuncio Recuperación de Capital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            width: 1200px;
+            height: 628px;
+            overflow: hidden;
+        }
+        .container {
+            width: 1200px;
+            height: 628px;
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1513530534585-c7b1394c6d51?w=1200&h=628&fit=crop') center center;
+            background-size: cover;
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(13, 33, 55, 0.95) 0%, rgba(13, 33, 55, 0.85) 50%, rgba(13, 33, 55, 0.7) 100%);
+        }
+        .content {
+            position: relative;
+            z-index: 2;
+            padding: 40px 50px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .logo-box {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            padding: 12px 20px;
+            border-radius: 8px;
+        }
+        .logo-text {
+            font-size: 28px;
+            font-weight: 900;
+            color: #0d2137;
+            letter-spacing: 2px;
+        }
+        .company-name {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .main-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            max-width: 700px;
+        }
+        .highlight {
+            color: #c9a227;
+        }
+        .subtitle {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            color: #0d2137;
+            font-size: 22px;
+            font-weight: 700;
+            padding: 12px 25px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 25px;
+        }
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 40px;
+            margin-bottom: 25px;
+            max-width: 650px;
+        }
+        .feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        .feature-icon {
+            width: 28px;
+            height: 28px;
+            background: rgba(201, 162, 39, 0.2);
+            border: 2px solid #c9a227;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #c9a227;
+            font-size: 14px;
+        }
+        .requirements-section {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px 25px;
+            border: 1px solid rgba(201, 162, 39, 0.3);
+            max-width: 500px;
+        }
+        .req-title {
+            color: #c9a227;
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .req-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .req-item {
+            color: #ffffff;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .req-item::before {
+            content: "•";
+            color: #c9a227;
+            font-size: 20px;
+        }
+        .cta-section {
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .cta-button {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            color: #0d2137;
+            font-size: 18px;
+            font-weight: 700;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+        .cta-text {
+            color: #ffffff;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .decorative-line {
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 300px;
+            background: linear-gradient(to bottom, transparent, #c9a227, transparent);
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="overlay"></div>
+        <div class="content">
+            <div class="logo-section">
+                <div class="logo-box">
+                    <span class="logo-text">RCF</span>
+                </div>
+                <span class="company-name">RECUPERACIÓN DE CAPITAL FINANCIERO</span>
+            </div>
+            
+            <h1 class="main-title">
+                ¿Realizaste depósitos y <span class="highlight">no recibiste</span> lo prometido?
+            </h1>
+            
+            <div class="subtitle">🔍 INVESTIGACIÓN GRATUITA DE TU CASO</div>
+            
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <span>Rastreo profesional de fondos</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <span>Análisis de cuentas bancarias</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <span>Asesoría personalizada</span>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">✓</div>
+                    <span>Seguimiento de tu caso</span>
+                </div>
+            </div>
+            
+            <div class="requirements-section">
+                <div class="req-title">📋 REQUISITOS:</div>
+                <div class="req-list">
+                    <div class="req-item">Identificación oficial</div>
+                    <div class="req-item">Comprobantes de pago</div>
+                    <div class="req-item">Información de las cuentas</div>
+                </div>
+            </div>
+            
+            <div class="cta-section">
+                <div class="cta-button">Contáctanos Hoy</div>
+                <span class="cta-text">Cuéntanos tu situación →</span>
+            </div>
+        </div>
+        <div class="decorative-line"></div>
+    </div>
+</body>
+</html>

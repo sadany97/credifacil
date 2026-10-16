@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=400">
+    <title>Guía de Instalación - Recuperación de Capital</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(180deg, #0d2137 0%, #1a3a5c 100%);
+            width: 400px;
+            padding: 0;
+        }
+        .container {
+            width: 400px;
+            background: linear-gradient(180deg, #0d2137 0%, #1a3a5c 100%);
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0d2137 0%, #153350 100%);
+            padding: 30px 20px;
+            text-align: center;
+            border-bottom: 3px solid #c9a227;
+        }
+        .logo-box {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            padding: 12px 24px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: #0d2137;
+            letter-spacing: 2px;
+        }
+        .header h1 {
+            color: #ffffff;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .header p {
+            color: #c9a227;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        /* Trust Banner */
+        .trust-banner {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            padding: 15px 20px;
+            text-align: center;
+        }
+        .trust-banner p {
+            color: #0d2137;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.5;
+        }
+        .trust-banner .icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+        
+        /* Step Card */
+        .step {
+            padding: 25px 20px;
+            border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+        }
+        .step-number {
+            background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%);
+            color: #0d2137;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            margin: 0 auto 15px;
+            box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
+        }
+        .step h2 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .step p {
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        /* Phone Mockup */
+        .phone {
+            width: 280px;
+            margin: 0 auto;
+            background: #1a1a1a;
+            border-radius: 30px;
+            padding: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        }
+        .phone-screen {
+            background: #ffffff;
+            border-radius: 22px;
+            overflow: hidden;
+            min-height: 200px;
+        }
+        .phone-notch {
+            background: #1a1a1a;
+            height: 25px;
+            width: 120px;
+            margin: 0 auto;
+            border-radius: 0 0 15px 15px;
+        }
+        
+        /* Android Dialog */
+        .android-dialog {
+            background: #ffffff;
+            margin: 30px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        .dialog-header {
+            padding: 20px;
+            text-align: center;
+        }
+        .dialog-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        .dialog-icon.warning {
+            color: #ff9800;
+        }
+        .dialog-icon.shield {
+            color: #4CAF50;
+        }
+        .dialog-icon.check {
+            color: #4CAF50;
+        }
+        .dialog-title {
+            color: #333;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        .dialog-text {
+            color: #666;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .dialog-buttons {
+            display: flex;
+            border-top: 1px solid #eee;
+        }
+        .dialog-btn {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            font-size: 14px;
+            font-weight: 600;
+            border: none;
+            background: none;
+        }
+        .dialog-btn.cancel {
+            color: #666;
+            border-right: 1px solid #eee;
+        }
+        .dialog-btn.primary {
+            color: #1976D2;
+        }
+        .dialog-btn.green {
+            color: #4CAF50;
+        }
+        
+        /* Toggle Switch */
+        .settings-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            background: #f5f5f5;
+            margin: 10px 15px;
+            border-radius: 10px;
+        }
+        .settings-label {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .toggle {
+            width: 50px;
+            height: 28px;
+            background: #4CAF50;
+            border-radius: 14px;
+            position: relative;
+        }
+        .toggle::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            right: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(201, 162, 39, 0.15);
+            border: 2px solid #c9a227;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .highlight-box p {
+            color: #c9a227;
+            font-size: 13px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        /* Arrow indicator */
+        .arrow-indicator {
+            text-align: center;
+            padding: 10px;
+        }
+        .arrow-indicator span {
+            display: inline-block;
+            color: #c9a227;
+            font-size: 30px;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            padding: 20px;
+        }
+        .progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            background: linear-gradient(90deg, #c9a227, #dbb42c);
+            height: 100%;
+            width: 100%;
+            border-radius: 10px;
+        }
+        .progress-text {
+            text-align: center;
+            color: #4CAF50;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+        
+        /* App Icon */
+        .app-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #0d2137 0%, #1a3a5c 100%);
+            border-radius: 18px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .app-icon span {
+            color: #c9a227;
+            font-size: 12px;
+            font-weight: 800;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #0d2137 0%, #153350 100%);
+            padding: 30px 20px;
+            text-align: center;
+            border-top: 3px solid #c9a227;
+        }
+        .footer h3 {
+            color: #c9a227;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .footer p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+        .footer .checkmark {
+            color: #4CAF50;
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+        
+        /* Swipe indicator */
+        .swipe-hint {
+            text-align: center;
+            padding: 20px;
+            color: rgba(255,255,255,0.5);
+            font-size: 12px;
+        }
+        .swipe-hint span {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-box">
+                <span class="logo-text">RCF</span>
+            </div>
+            <h1>Guía de Instalación</h1>
+            <p>Sigue estos pasos sencillos</p>
+        </div>
+        
+        <!-- Trust Banner -->
+        <div class="trust-banner">
+            <div class="icon">🔒</div>
+            <p>Esta aplicación es 100% SEGURA y OFICIAL.<br>El mensaje de advertencia es normal para apps fuera de Play Store.</p>
+        </div>
+        
+        <div class="swipe-hint">
+            <span>👇</span>
+            Desliza para ver los pasos
+        </div>
+        
+        <!-- Step 1 -->
+        <div class="step">
+            <div class="step-number">1</div>
+            <h2>Descarga el archivo APK</h2>
+            <p>Abre el archivo que te enviamos por WhatsApp o el link de descarga</p>
+            
+            <div class="phone">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div class="android-dialog">
+                        <div class="dialog-header">
+                            <div class="dialog-icon">📥</div>
+                            <div class="dialog-title">Descarga completa</div>
+                            <div class="dialog-text">RecuperacionCapital.apk<br>(15.2 MB)</div>
+                        </div>
+                        <div class="dialog-buttons">
+                            <button class="dialog-btn primary">ABRIR</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>👆 Toca "ABRIR" para comenzar la instalación</p>
+            </div>
+        </div>
+        
+        <div class="arrow-indicator"><span>⬇</span></div>
+        
+        <!-- Step 2 -->
+        <div class="step">
+            <div class="step-number">2</div>
+            <h2>¡No te asustes!</h2>
+            <p>Aparecerá este mensaje de seguridad. Es NORMAL para todas las apps que no vienen de Play Store.</p>
+            
+            <div class="phone">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div class="android-dialog">
+                        <div class="dialog-header">
+                            <div class="dialog-icon warning">⚠️</div>
+                            <div class="dialog-title">Play Protect no reconoce al desarrollador</div>
+                            <div class="dialog-text">Las apps de desarrolladores desconocidos a veces pueden ser inseguras.</div>
+                        </div>
+                        <div class="dialog-buttons">
+                            <button class="dialog-btn cancel">Cancelar</button>
+                            <button class="dialog-btn primary">Más información</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>👆 Toca "Más información" o "Configuración"</p>
+            </div>
+        </div>
+        
+        <div class="arrow-indicator"><span>⬇</span></div>
+        
+        <!-- Step 3 -->
+        <div class="step">
+            <div class="step-number">3</div>
+            <h2>Activa el permiso</h2>
+            <p>Permite la instalación desde esta fuente. Solo necesitas hacerlo una vez.</p>
+            
+            <div class="phone">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div style="padding: 20px;">
+                        <div style="color: #333; font-size: 16px; font-weight: 600; margin-bottom: 20px; text-align: center;">Configuración de seguridad</div>
+                        
+                        <div class="settings-item">
+                            <span class="settings-label">Permitir de esta fuente</span>
+                            <div class="toggle"></div>
+                        </div>
+                        
+                        <div style="color: #666; font-size: 12px; padding: 15px; text-align: center;">
+                            Permite instalar apps desde WhatsApp o tu navegador
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>👆 Activa el interruptor (debe quedar en verde)</p>
+            </div>
+        </div>
+        
+        <div class="arrow-indicator"><span>⬇</span></div>
+        
+        <!-- Step 4 -->
+        <div class="step">
+            <div class="step-number">4</div>
+            <h2>Instala la app</h2>
+            <p>Ahora sí, toca "Instalar" para continuar con la instalación.</p>
+            
+            <div class="phone">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div android-dialog" style="margin: 30px 15px; text-align: center;">
+                        <div class="app-icon">
+                            <span>RCF</span>
+                        </div>
+                        <div style="color: #333; font-size: 16px; font-weight: 600; margin-bottom: 5px;">Recuperación de Capital</div>
+                        <div style="color: #666; font-size: 12px; margin-bottom: 20px;">¿Deseas instalar esta aplicación?</div>
+                        
+                        <div style="display: flex; gap: 10px; padding: 0 20px;">
+                            <button style="flex: 1; padding: 12px; border: 1px solid #ddd; background: white; border-radius: 8px; color: #666; font-weight: 600;">Cancelar</button>
+                            <button style="flex: 1; padding: 12px; border: none; background: #4CAF50; border-radius: 8px; color: white; font-weight: 600;">Instalar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>👆 Toca el botón verde "Instalar"</p>
+            </div>
+        </div>
+        
+        <div class="arrow-indicator"><span>⬇</span></div>
+        
+        <!-- Step 5 -->
+        <div class="step">
+            <div class="step-number">5</div>
+            <h2>Espera unos segundos</h2>
+            <p>La instalación tardará solo unos momentos. ¡Ya casi terminas!</p>
+            
+            <div class="phone">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div style="padding: 40px 20px; text-align: center;">
+                        <div class="app-icon">
+                            <span>RCF</span>
+                        </div>
+                        <div style="color: #333; font-size: 16px; font-weight: 600; margin-bottom: 20px;">Instalando...</div>
+                        <div class="progress-container">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <div class="progress-text">Instalación completa ✓</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="arrow-indicator"><span>⬇</span></div>
+        
+        <!-- Step 6 -->
+        <div class="step">
+            <div class="step-number">6</div>
+            <h2>¡Listo! Abre la app</h2>
+            <p>Toca "Abrir" y comienza a usar Recuperación de Capital.</p>
+            
+            <div class="phone">
+                <div class="phone-screen">
+                    <div class="phone-notch"></div>
+                    <div style="padding: 40px 20px; text-align: center;">
+                        <div class="dialog-icon check">✅</div>
+                        <div style="color: #333; font-size: 18px; font-weight: 600; margin-bottom: 10px;">¡Aplicación instalada!</div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 25px;">Recuperación de Capital está lista para usarse</div>
+                        
+                        <button style="width: 100%; padding: 15px; border: none; background: linear-gradient(135deg, #c9a227 0%, #dbb42c 100%); border-radius: 10px; color: #0d2137; font-size: 16px; font-weight: 700;">ABRIR APLICACIÓN</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <div class="checkmark">✅</div>
+            <h3>¡Instalación Exitosa!</h3>
+            <p>Ya puedes disfrutar de todos los beneficios de Recuperación de Capital.</p>
+            <p style="margin-top: 15px; color: #c9a227; font-weight: 600;">¿Dudas? Contáctanos</p>
+        </div>
+        
+        <!-- Trust Footer -->
+        <div class="trust-banner">
+            <p>🔒 App 100% Segura y Verificada<br>Tus datos están protegidos</p>
+        </div>
+    </div>
+</body>
+</html>
