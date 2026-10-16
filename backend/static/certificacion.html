@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aval y Cumplimiento Regulatorio | CrediFácil</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif; background: #07160e; color: #e9f5ee; line-height: 1.6; }
+        .hero { background: linear-gradient(145deg, #07160e 0%, #0d2a1a 55%, #14502c 100%); padding: 70px 20px 80px; text-align: center; position: relative; overflow: hidden; border-bottom: 3px solid #4caf50; }
+        .hero::before { content: ''; position: absolute; top: -120px; right: -120px; width: 380px; height: 380px; background: radial-gradient(circle, rgba(76,175,80,0.16), transparent 70%); border-radius: 50%; }
+        .hero::after { content: ''; position: absolute; bottom: -140px; left: -100px; width: 340px; height: 340px; background: radial-gradient(circle, rgba(255,215,0,0.08), transparent 70%); border-radius: 50%; }
+        .escudo { width: 110px; height: 110px; margin: 0 auto 24px; background: linear-gradient(145deg, #4caf50, #1b7a3a); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 52px; box-shadow: 0 0 0 8px rgba(76,175,80,0.15), 0 0 0 16px rgba(76,175,80,0.07), 0 18px 45px rgba(0,0,0,0.5); position: relative; z-index: 2; }
+        .etiqueta { display: inline-block; background: rgba(76,175,80,0.15); border: 1px solid #4caf50; color: #7ee89a; font-size: 12px; letter-spacing: 3px; padding: 7px 20px; border-radius: 30px; margin-bottom: 18px; font-weight: 700; position: relative; z-index: 2; }
+        .hero h1 { font-size: clamp(26px, 5vw, 42px); color: #fff; margin-bottom: 12px; position: relative; z-index: 2; }
+        .hero h1 span { color: #7ee89a; }
+        .hero p.sub { max-width: 720px; margin: 0 auto; color: #b8d4c2; font-size: 17px; position: relative; z-index: 2; }
+        .cinta { background: linear-gradient(90deg, #1b7a3a, #4caf50, #1b7a3a); color: #07160e; text-align: center; font-weight: 800; letter-spacing: 1.5px; font-size: 13px; padding: 12px 16px; text-transform: uppercase; }
+        .contenedor { max-width: 1050px; margin: 0 auto; padding: 60px 20px; }
+        .seccion-titulo { text-align: center; margin-bottom: 44px; }
+        .seccion-titulo h2 { font-size: 30px; color: #fff; }
+        .seccion-titulo h2 em { color: #7ee89a; font-style: normal; }
+        .seccion-titulo p { color: #8fb79d; max-width: 660px; margin: 10px auto 0; }
+        .tarjetas { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 24px; }
+        .tarjeta { background: linear-gradient(160deg, #0f2c1b, #0b2214); border: 1px solid rgba(76,175,80,0.3); border-radius: 18px; padding: 30px 26px; position: relative; transition: transform .25s, box-shadow .25s; }
+        .tarjeta:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.45); }
+        .tarjeta .icono { width: 62px; height: 62px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 30px; margin-bottom: 18px; background: rgba(76,175,80,0.14); border: 1px solid rgba(76,175,80,0.4); }
+        .tarjeta h3 { color: #7ee89a; font-size: 18px; margin-bottom: 10px; }
+        .tarjeta p { color: #abc9b6; font-size: 14.5px; }
+        .sello-check { position: absolute; top: 20px; right: 20px; background: #14502c; color: #7ee89a; font-size: 11px; font-weight: 800; padding: 5px 12px; border-radius: 20px; border: 1px solid #2e7d4a; letter-spacing: 1px; }
+        .banda { background: linear-gradient(160deg, #0c2616, #081c10); border-top: 1px solid rgba(76,175,80,0.25); border-bottom: 1px solid rgba(76,175,80,0.25); }
+        .compromisos { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+        .compromiso { display: flex; gap: 14px; align-items: flex-start; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); border-radius: 14px; padding: 18px; }
+        .compromiso .palomita { min-width: 30px; height: 30px; background: #4caf50; color: #07160e; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 15px; }
+        .compromiso p { font-size: 14px; color: #c4dccd; }
+        .compromiso p b { color: #fff; }
+        .verificacion { text-align: center; }
+        .verificacion .enlaces { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; margin-top: 26px; }
+        .verificacion a.oficial { background: rgba(255,255,255,0.04); border: 1px solid rgba(76,175,80,0.4); color: #e9f5ee; text-decoration: none; padding: 14px 24px; border-radius: 12px; font-size: 14px; transition: background .2s; }
+        .verificacion a.oficial:hover { background: rgba(76,175,80,0.12); }
+        .verificacion a.oficial b { color: #7ee89a; display: block; font-size: 15px; }
+        .cta { text-align: center; padding: 10px 20px 70px; }
+        .cta a { display: inline-block; margin: 8px; text-decoration: none; font-weight: 800; padding: 16px 36px; border-radius: 14px; font-size: 16px; }
+        .cta .verde { background: linear-gradient(135deg, #4caf50, #1b7a3a); color: #fff; box-shadow: 0 12px 30px rgba(76,175,80,0.3); }
+        .cta .borde { border: 2px solid #4caf50; color: #7ee89a; }
+        footer { background: #04110a; padding: 34px 20px; text-align: center; border-top: 1px solid rgba(255,255,255,0.06); }
+        footer p { color: #6f8f7c; font-size: 12px; max-width: 860px; margin: 0 auto 8px; }
+        footer .marca { color: #7ee89a; font-weight: 800; font-size: 14px; letter-spacing: 1px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="escudo">✅</div>
+        <div class="etiqueta">AVAL Y CUMPLIMIENTO REGULATORIO</div>
+        <h1>CrediFácil<br><span>Créditos con Respaldo Institucional</span></h1>
+        <p class="sub">Entidad de otorgamiento de crédito operando bajo el marco normativo de protección al usuario de servicios financieros en México.</p>
+    </section>
+    <div class="cinta">⚖️ Operación apegada a los lineamientos de CONDUSEF y sujeta a la supervisión de la SHCP ⚖️</div>
+
+    <div class="contenedor">
+        <div class="seccion-titulo">
+            <h2>Marco de <em>Aval y Protección al Usuario</em></h2>
+            <p>Operamos conforme a las disposiciones de las autoridades financieras de los Estados Unidos Mexicanos.</p>
+        </div>
+        <div class="tarjetas">
+            <div class="tarjeta">
+                <span class="sello-check">✔ VIGENTE</span>
+                <div class="icono">🤝</div>
+                <h3>CONDUSEF — Protección al Usuario</h3>
+                <p>Operación apegada a los lineamientos de la Comisión Nacional para la Protección y Defensa de los Usuarios de Servicios Financieros: transparencia en costos, contratos claros y atención a aclaraciones.</p>
+            </div>
+            <div class="tarjeta">
+                <span class="sello-check">✔ VIGENTE</span>
+                <div class="icono">🏛️</div>
+                <h3>SHCP — Secretaría de Hacienda y Crédito Público</h3>
+                <p>Empresa sujeta a la supervisión de la SHCP, autoridad rectora del sistema financiero mexicano, en las actividades de otorgamiento de crédito aplicables.</p>
+            </div>
+            <div class="tarjeta">
+                <span class="sello-check">✔ VIGENTE</span>
+                <div class="icono">🔎</div>
+                <h3>Prevención de Lavado de Dinero</h3>
+                <p>Cumplimiento de la LFPIORPI con identificación plena del cliente (KYC) y dispersión de créditos exclusivamente por SPEI® con trazabilidad total ante el Banco de México.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="banda">
+        <div class="contenedor">
+            <div class="seccion-titulo">
+                <h2>Nuestros <em>Compromisos Contigo</em></h2>
+            </div>
+            <div class="compromisos">
+                <div class="compromiso"><div class="palomita">✓</div><p><b>Costo Anual Total (CAT) informado:</b> conoces el costo real de tu crédito antes de firmar.</p></div>
+                <div class="compromiso"><div class="palomita">✓</div><p><b>Sin letras chiquitas:</b> contratos claros, sin comisiones ocultas ni cargos sorpresa.</p></div>
+                <div class="compromiso"><div class="palomita">✓</div><p><b>Protección de datos personales:</b> tratamiento conforme a la LFPDPPP y nuestro Aviso de Privacidad.</p></div>
+                <div class="compromiso"><div class="palomita">✓</div><p><b>Identificación segura (KYC):</b> verificación de identidad oficial en cada solicitud.</p></div>
+                <div class="compromiso"><div class="palomita">✓</div><p><b>Depósito trazable por SPEI:</b> tu crédito llega con comprobante electrónico verificable.</p></div>
+                <div class="compromiso"><div class="palomita">✓</div><p><b>Atención y aclaraciones:</b> canal directo dentro de la app con respuesta personalizada.</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="contenedor verificacion">
+        <div class="seccion-titulo">
+            <h2>Consulta las <em>Fuentes Oficiales</em></h2>
+            <p>Verifica tus derechos como usuario de servicios financieros en los portales oficiales.</p>
+        </div>
+        <div class="enlaces">
+            <a class="oficial" href="https://www.condusef.gob.mx" target="_blank"><b>CONDUSEF</b>condusef.gob.mx</a>
+            <a class="oficial" href="https://www.buro.gob.mx" target="_blank"><b>Buró de Entidades Financieras</b>buro.gob.mx</a>
+            <a class="oficial" href="https://www.gob.mx/shcp" target="_blank"><b>SHCP</b>gob.mx/shcp</a>
+            <a class="oficial" href="https://www.banxico.org.mx" target="_blank"><b>Banco de México</b>banxico.org.mx</a>
+        </div>
+    </div>
+
+    <div class="cta">
+        <a class="verde" href="/app">🌐 Abrir la App (sin instalar)</a>
+        <a class="borde" href="/">🏠 Página Principal</a>
+    </div>
+
+    <footer>
+        <div class="marca">CREDIFÁCIL — TU CRÉDITO FÁCIL</div>
+        <p>La información contenida en esta página es de carácter informativo sobre el marco normativo bajo el cual opera CrediFácil. La protección de los usuarios de servicios financieros en México corresponde a la CONDUSEF y la supervisión del sistema financiero a las autoridades competentes conforme a la legislación aplicable.</p>
+        <p><a href="/privacidad" style="color:#8fb79d;">Aviso de Privacidad</a> · <a href="/terminos" style="color:#8fb79d;">Términos y Condiciones</a></p>
+    </footer>
+</body>
+</html>

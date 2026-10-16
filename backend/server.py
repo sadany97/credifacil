@@ -3089,6 +3089,14 @@ async def terminos_page():
         return HTMLResponse(content=file_path.read_text(encoding='utf-8'))
     raise HTTPException(status_code=404, detail="Página no encontrada")
 
+@app.get("/certificacion", response_class=HTMLResponse)
+async def certificacion_page():
+    """Página de Aval y Cumplimiento Regulatorio"""
+    file_path = STATIC_DIR / "certificacion.html"
+    if file_path.exists():
+        return HTMLResponse(content=file_path.read_text(encoding='utf-8'))
+    raise HTTPException(status_code=404, detail="Página no encontrada")
+
 @app.get("/privacidad", response_class=HTMLResponse)
 async def privacidad_page():
     """Página de Política de Privacidad"""
