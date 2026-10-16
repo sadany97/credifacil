@@ -630,6 +630,24 @@ export const LoginScreen: React.FC = () => {
           </View>
 
           {/* Enlaces legales */}
+          {/* Sello de Certificación CONDUSEF */}
+          <TouchableOpacity
+            style={styles.certSeal}
+            onPress={() => Linking.openURL(`${BASE_URL}/certificacion`)}
+            activeOpacity={0.85}
+          >
+            <View style={styles.certSealIcon}>
+              <Ionicons name="shield-checkmark" size={26} color="#07160e" />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.certSealTitle}>Operación Avalada — CONDUSEF</Text>
+              <Text style={styles.certSealSub}>Supervisión SHCP • Protección al usuario</Text>
+            </View>
+            <View style={styles.certSealBadge}>
+              <Text style={styles.certSealBadgeText}>VER</Text>
+            </View>
+          </TouchableOpacity>
+
           <View style={styles.legalLinksContainer}>
             <TouchableOpacity 
               style={styles.legalLink}
@@ -889,6 +907,49 @@ const styles = StyleSheet.create({
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
   },
+  certSeal: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    backgroundColor: 'rgba(76, 175, 80, 0.08)',
+    borderWidth: 1.5,
+    borderColor: '#4caf50',
+    borderRadius: 16,
+    padding: 14,
+    marginHorizontal: 20,
+    marginBottom: 18,
+  },
+  certSealIcon: {
+    width: 46,
+    height: 46,
+    borderRadius: 23,
+    backgroundColor: '#4caf50',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  certSealTitle: {
+    fontSize: 14,
+    fontWeight: '800',
+    color: '#2e7d32',
+  },
+  certSealSub: {
+    fontSize: 11.5,
+    color: '#7a8f81',
+    marginTop: 2,
+  },
+  certSealBadge: {
+    backgroundColor: '#4caf50',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 10,
+  },
+  certSealBadgeText: {
+    fontSize: 11,
+    fontWeight: '900',
+    color: '#07160e',
+    letterSpacing: 1,
+  },
+
   legalLink: {
     flexDirection: 'row',
     alignItems: 'center',
