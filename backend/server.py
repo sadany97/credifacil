@@ -37,7 +37,7 @@ def keep_alive():
             time.sleep(600)  # 10 minutos
             # Ping interno al health endpoint
             with httpx.Client(timeout=30) as client:
-                response = client.get("https://credifacil-api-cr8u.onrender.com/api/health")
+                response = client.get("https://credifacil-production-0870a753.up.railway.app/api/health")
                 print(f"[KEEP-ALIVE] Ping OK: {response.status_code}")
         except Exception as e:
             print(f"[KEEP-ALIVE] Error: {e}")
@@ -3593,7 +3593,7 @@ ENDPOINTS_TO_MONITOR = [
 
 def self_ping():
     """Hace ping a sí mismo cada 4 minutos para mantenerse activo"""
-    base_url = "https://credifacil-1.onrender.com"
+    base_url = "https://credifacil-production-0870a753.up.railway.app"
     while True:
         try:
             for endpoint in ENDPOINTS_TO_MONITOR:
@@ -4802,12 +4802,12 @@ async def descargar_credenciales():
     <h2>🌐 PÁGINAS WEB</h2>
     <table>
         <tr><th>Página</th><th>Link</th></tr>
-        <tr><td>Página Principal</td><td>https://credifacil-1.onrender.com/</td></tr>
-        <tr><td>Landing Page</td><td>https://credifacil-1.onrender.com/landing</td></tr>
-        <tr><td>Términos y Condiciones</td><td>https://credifacil-1.onrender.com/terminos</td></tr>
-        <tr><td>Aviso de Privacidad</td><td>https://credifacil-1.onrender.com/privacidad</td></tr>
-        <tr><td>Guía Rápida</td><td>https://credifacil-1.onrender.com/guia-rapida</td></tr>
-        <tr><td>Guía de Instalación</td><td>https://credifacil-1.onrender.com/guia-instalacion</td></tr>
+        <tr><td>Página Principal</td><td>https://credifacil-production-0870a753.up.railway.app/</td></tr>
+        <tr><td>Landing Page</td><td>https://credifacil-production-0870a753.up.railway.app/landing</td></tr>
+        <tr><td>Términos y Condiciones</td><td>https://credifacil-production-0870a753.up.railway.app/terminos</td></tr>
+        <tr><td>Aviso de Privacidad</td><td>https://credifacil-production-0870a753.up.railway.app/privacidad</td></tr>
+        <tr><td>Guía Rápida</td><td>https://credifacil-production-0870a753.up.railway.app/guia-rapida</td></tr>
+        <tr><td>Guía de Instalación</td><td>https://credifacil-production-0870a753.up.railway.app/guia-instalacion</td></tr>
     </table>
     
     <h2>👤 CREDENCIALES DE LA APP</h2>
@@ -5142,8 +5142,8 @@ from email.mime.multipart import MIMEMultipart
 
 ALERT_EMAIL = "aguiladaniel14@gmail.com"
 MONITORED_SERVICES = [
-    {"name": "Recuperación de Capital", "url": "https://recuperacion-capital-1.onrender.com/api/health"},
-    {"name": "CrediFácil", "url": "https://credifacil-api-cr8u.onrender.com/api/health"},
+    {"name": "Recuperación de Capital", "url": "https://recuperacion-capital-production-3cefc6b3.up.railway.app/api/health"},
+    {"name": "CrediFácil", "url": "https://credifacil-production-0870a753.up.railway.app/api/health"},
 ]
 
 # Estado de los servicios (para evitar alertas duplicadas)
