@@ -5233,5 +5233,15 @@ async def run_health_check():
 # ============================================
 WEBAPP_DIR = Path(__file__).parent / "webapp"
 if WEBAPP_DIR.exists():
+    # Alias: los bundles referencian assets bajo 'node_modules', pero esa carpeta
+    # se renombró a 'vendor_modules' (los CLIs de deploy excluyen node_modules)
+    @app.get("/app/assets/node_modules/{file_path:path}")
+    async def serve_vendor_assets(file_path: str):
+        base = (WEBAPP_DIR / "assets" / "vendor_modules").resolve()
+        target = (base / file_path).resolve()
+        if str(target).startswith(str(base)) and target.is_file():
+            return FileResponse(str(target))
+        raise HTTPException(status_code=404, detail="Not found")
+
     app.mount("/app", StaticFiles(directory=str(WEBAPP_DIR), html=True), name="webapp")
     print("[WEBAPP] Versión web disponible en /app")
