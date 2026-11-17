@@ -4,7 +4,7 @@ import Constants from 'expo-constants';
 // URL del servidor
 const API_URL = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL 
   || process.env.EXPO_PUBLIC_BACKEND_URL 
-  || 'https://credifacil-api-cr8u.onrender.com';
+  || 'https://credifacil-production-0870a753.up.railway.app';
 
 console.log('[API] Backend URL:', API_URL);
 

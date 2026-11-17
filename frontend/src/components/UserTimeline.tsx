@@ -38,7 +38,7 @@ export const UserTimeline: React.FC<UserTimelineProps> = ({
   const [timeline, setTimeline] = useState<TimelineEvent[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = 'https://credifacil-api-cr8u.onrender.com';
+  const API_URL = 'https://credifacil-production-0870a753.up.railway.app';
 
   const fetchTimeline = async () => {
     setLoading(true);
