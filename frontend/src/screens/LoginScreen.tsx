@@ -44,13 +44,13 @@ const BASE_URL = Constants.expoConfig?.extra?.EXPO_PUBLIC_BACKEND_URL || process
 // Slogans de CrediFácil - CONFIANZA Y FACILIDAD
 const SLOGANS = [
   "Más de $1,200 millones en créditos otorgados en 2024",
-  "Institución regulada por CONDUSEF | Registro SIPRES vigente",
+  "Protocolos de seguridad de nivel bancario | Conexión cifrada",
   "95% de solicitudes aprobadas | +1,000,000 clientes satisfechos",
   "Sin revisar Buró de Crédito | Aprobación en 24 horas",
   "Miembros activos de ASOFOM | Operación 100% legal y transparente",
   "Tasas competitivas desde 1.5% mensual | Sin comisiones ocultas",
-  "Premio Nacional de Inclusión Financiera 2023 y 2024",
-  "Certificación ISO 27001 en Seguridad de la Información",
+  "Miles de créditos otorgados en toda la República",
+  "Cifrado SSL de 256 bits en toda la plataforma",
   "Más de 15 años impulsando el crecimiento de familias mexicanas",
   "Tu crédito aprobado de forma fácil, rápida y segura",
 ];
@@ -400,7 +400,7 @@ export const LoginScreen: React.FC = () => {
             <View style={styles.shcpIconContainer}>
               <Ionicons name="shield-checkmark" size={18} color="#c9a227" />
             </View>
-            <Text style={styles.shcpText}>Empresa sujeta a supervisión de la SHCP</Text>
+            <Text style={styles.shcpText}>Conexión segura · Datos protegidos y cifrados</Text>
             <View style={styles.shcpVerified}>
               <Ionicons name="checkmark-circle" size={14} color="#4CAF50" />
             </View>
@@ -640,8 +640,8 @@ export const LoginScreen: React.FC = () => {
               <Ionicons name="shield-checkmark" size={26} color="#07160e" />
             </View>
             <View style={{ flex: 1 }}>
-              <Text style={styles.certSealTitle}>Operación Avalada — CONDUSEF</Text>
-              <Text style={styles.certSealSub}>Supervisión SHCP • Protección al usuario</Text>
+              <Text style={styles.certSealTitle}>Compromiso de Seguridad y Transparencia</Text>
+              <Text style={styles.certSealSub}>Datos protegidos • Atención al usuario</Text>
             </View>
             <View style={styles.certSealBadge}>
               <Text style={styles.certSealBadgeText}>VER</Text>

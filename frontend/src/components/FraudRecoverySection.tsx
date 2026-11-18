@@ -109,7 +109,7 @@ export const FraudRecoverySection: React.FC<CreditBenefitsSectionProps> = ({ com
 
       <View style={styles.trustBadge}>
         <Ionicons name="ribbon" size={18} color="#FFD700" />
-        <Text style={styles.trustText}>Institución regulada por CONDUSEF</Text>
+        <Text style={styles.trustText}>Conexión segura y datos protegidos</Text>
       </View>
     </View>
   );

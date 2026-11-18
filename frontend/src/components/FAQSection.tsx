@@ -20,7 +20,7 @@ const FAQ_DATA = [
   {
     id: '2',
     question: '¿Es seguro solicitar mi crédito?',
-    answer: 'Absolutamente. Utilizamos encriptación de nivel bancario para proteger tu información. Todos nuestros procesos están regulados por CONDUSEF y supervisados por las autoridades.',
+    answer: 'Absolutamente. Utilizamos encriptación de nivel bancario para proteger tu información. Todos nuestros procesos están respaldados por protocolos internos de verificación y seguridad.',
     icon: 'shield-checkmark-outline',
   },
   {

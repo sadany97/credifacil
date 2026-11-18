@@ -40,7 +40,7 @@ const FAQ_DATA = [
   {
     id: '5',
     question: '¿Están regulados por alguna autoridad?',
-    answer: 'Sí, operamos bajo la supervisión de la CONDUSEF y cumplimos con todas las normativas de la SHCP para servicios financieros en México.',
+    answer: 'Operamos como empresa privada de crédito, con protocolos internos de seguridad y cumpliendo la legislación mexicana aplicable.',
     category: 'general',
   },
   {
